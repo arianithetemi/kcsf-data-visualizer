@@ -1,4 +1,4 @@
 name: KCSF Visualizer
-requesturl: "'http://0.0.0.0:5000/'"
+requesturl: "'http://46.101.135.45/'"
 baseurl: /
-basepath: "/kcsf-data-visualizer/"
+basepath: "/kcsf-data-visualizer"
