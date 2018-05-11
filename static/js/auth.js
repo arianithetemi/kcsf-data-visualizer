@@ -13,7 +13,7 @@ $(document).ready(() => {
       }
 
       $.ajax({
-         url: 'http://0.0.0.0:5000/login',
+         url: APIBaseUrl + 'login',
          type: 'POST',
          dataType: 'json',
          headers: {
@@ -23,7 +23,7 @@ $(document).ready(() => {
          data: JSON.stringify(data),
          success: data => {
             if (data.success == true) {
-               window.location.href = "/dashboard";
+               window.location.href = "/kcsf-data-visualizer/dashboard";
                localStorage.setItem('token', data.token);
             } else {
                alert("Wrong");

@@ -1,5 +1,5 @@
 ---
 layout: dashboard
 language: english
-permalink: /dashboard/
+permalink: /kcsf-data-visualizer/dashboard
 ---

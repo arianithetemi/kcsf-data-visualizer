@@ -1,5 +1,5 @@
 ---
 layout: login
 language: english
-permalink: /login/
+permalink: /kcsf-data-visualizer/login
 ---
