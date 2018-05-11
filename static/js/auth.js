@@ -23,7 +23,7 @@ $(document).ready(() => {
          data: JSON.stringify(data),
          success: data => {
             if (data.success == true) {
-               window.location.href = "/kcsf-data-visualizer/dashboard";
+               window.location.href = "{{ site.basepath }}/dashboard";
                localStorage.setItem('token', data.token);
             } else {
                alert("Wrong");
