@@ -1,22 +1,144 @@
 <!DOCTYPE html>
 <html>
-{% include new_header.html %}
 
-<script>
-   if (localStorage.getItem('token') == null) {
-      window.location.href = "{{ site.basepath }}/login";
-   }
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>KCSF Paneli Administrues</title>
+  <!-- Bootstrap core CSS-->
+  <link href="{{ site.basepath }}/static/bootstrap/css/bootstrap4.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="{{ site.basepath }}/static/css/font-awesome.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="{{ site.basepath }}/static/css/sb-admin.css" rel="stylesheet">
+  <script src="{{ site.basepath }}/static/jquery/jquery-3.1.0.js"></script>
 
-   $(document).on('click', '#logout', e => {
-      console.log("clicked");
-      localStorage.removeItem('token');
-      window.location.href = "{{ site.basepath }}/login";
-   });
-</script>
+  <script>
+     if (localStorage.getItem('token') == null) {
+        window.location.href = "{{ site.basepath }}/login";
+     }
 
-<body class="container">
-   <h2>Dashboard</h2>
-   <button class="btn btn-primary" id="logout">Logout</button>
+     $(document).on('click', '#logout', e => {
+        e.preventDefault();
+        console.log("clicked");
+        localStorage.removeItem('token');
+        window.location.href = "{{ site.basepath }}/login";
+     });
+  </script>
+
+</head>
+
+<body class="fixed-nav sticky-footer bg-dark" id="page-top">
+  <!-- Navigation-->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top" id="mainNav">
+    <a class="navbar-brand" href="index.html">Paneli Administrues</a>
+    <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive"
+      aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarResponsive">
+      <ul class="navbar-nav navbar-sidenav" id="exampleAccordion">
+        <li class="nav-item active" data-toggle="tooltip" data-placement="right" title="Profili">
+          <a class="nav-link" href="#profile">
+            <i class="fa fa-fw fa-user"></i>
+            <span class="nav-link-text">Profili</span>
+          </a>
+        </li>
+        <li class="nav-item" data-toggle="tooltip" data-placement="right" title="Importimi i të dhënave">
+          <a class="nav-link" href="#data">
+            <i class="fa fa-fw fa-database"></i>
+            <span class="nav-link-text">Importimi i të dhënave</span>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav sidenav-toggler">
+        <li class="nav-item">
+          <a class="nav-link text-center" id="sidenavToggler">
+            <i class="fa fa-fw fa-angle-left"></i>
+          </a>
+        </li>
+      </ul>
+      <ul class="navbar-nav ml-auto">
+        <li class="nav-item">
+          <a id="" class="nav-link" data-toggle="modal" data-target="#logoutModal">
+            <i class="fa fa-fw fa-sign-out"></i>Çkyçu</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <div class="content-wrapper">
+    <div class="container-fluid">
+      <div id="profile" class="col-md-12 row mt-3">
+         <div class="col-md-1"></div>
+         <div class="col-md-10">
+              <table class="table profile table-hover">
+                  <thead>
+                      <th id="profile-header" colspan="2">Të dhënat e profilit
+                      </th>
+                  </thead>
+                  <tbody>
+                      <tr>
+                          <th>Administratorit:</th>
+                          <td id="fullName">KCSF Admin</td>
+                      </tr>
+                      <tr>
+                          <th>Email:</th>
+                          <td id="email">admin@kcsf.org</td>
+                      </tr>
+                  </tbody>
+              </table>
+              <div class="col-md-12 change-btns">
+                  <button class='btn btn-primary' id="change-password-btn" data-toggle="modal" style='margin-top: 10px;' data-target="#change-password-modal">
+                      Ndrysho fjalëkalimin
+                  </button>
+              </div>
+         </div>
+      </div>
+    </div>
+
+    <!-- /.content-wrapper-->
+    <footer class="sticky-footer">
+      <div class="container">
+        <div class="text-center">
+          <small>KCSF</small>
+        </div>
+      </div>
+    </footer>
+    <!-- Scroll to Top Button-->
+    <a class="scroll-to-top rounded" href="#page-top">
+      <i class="fa fa-angle-up"></i>
+    </a>
+
+    <!-- Logout Modal-->
+    <div class="modal fade" id="logoutModal" tabindex="-1" role="dialog" aria-labelledby="logoutModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+        <div class="modal-content">
+          <div class="modal-header">
+            <h5 class="modal-title" id="logoutModalLabel">Gati për çkyçje?</h5>
+            <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">×</span>
+            </button>
+          </div>
+          <div class="modal-body">Klikoni "Çkyçu" më poshtë për të përfunduar sesionin.</div>
+          <div class="modal-footer">
+            <button class="btn btn-secondary" type="button" data-dismiss="modal">Anulo</button>
+            <a id="logout" class="btn btn-primary" href="#">Çkyçu</a>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Bootstrap core JavaScript-->
+    <script src="{{ site.basepath }}/static/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="{{ site.basepath }}/static/jquery/jquery.easing.min.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="{{ site.basepath }}/static/js/sb-admin.min.js"></script>
+  </div>
 </body>
 
 </html>
