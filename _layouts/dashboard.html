@@ -66,6 +66,40 @@
       $('#import-data-form').on('submit', e => {
          e.preventDefault();
       });
+
+      $('#changePasswordForm').on('submit', e => {
+         e.preventDefault();
+
+         data = {
+            currentPassword: $('#currentPassword').val(),
+            newPassword: $('#newPassword').val(),
+            newPasswordConfirm: $('#newPasswordConfirm').val()
+         }
+
+         $.ajax({
+            url: APIBaseUrl + '/change-password',
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json',
+                'x-access-token': localStorage.getItem('token')
+            },
+            crossDomain: true,
+            data: JSON.stringify(data),
+            success: data => {
+               swal({
+                 type: data.success ? 'success' : 'error',
+                 title: data.success ? 'Sukses' : 'Gabim',
+                 text: data.msg,
+              }).then((result) => {
+                 if (result.value && data.success) {
+                    $('#change-password-modal').modal('hide');
+                    $('#changePasswordForm').trigger("reset");
+                 }
+              });
+            }
+         });
+      });
    });
 
    // Logging out the user
@@ -111,6 +145,39 @@
                   <button class='btn btn-primary' id="change-password-btn" data-toggle="modal" style='margin-top: 10px;' data-target="#change-password-modal">
                      Ndrysho fjalëkalimin
                   </button>
+                  <!-- Change password modal -->
+                  <div class="modal fade" tabindex="-1" role="dialog" id="change-password-modal">
+                      <div class="modal-dialog" role="document">
+                          <div class="modal-content">
+                              <div class="modal-header">
+                                  <h5 class="modal-title">Ndrysho fjalëkalimin</h5>
+                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                      <span aria-hidden="true">&times;</span>
+                                  </button>
+                              </div>
+                              <div class="modal-body">
+                                  <form id="changePasswordForm">
+                                      <div class="form-group">
+                                          <label for="currentpassword">Fjalëkalimi aktual:</label>
+                                          <input type="password" class="form-control" id="currentPassword" name="currentPassword">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="newPassword">Fjalëkalimi i ri:</label>
+                                          <input type="password" class="form-control" id="newPassword" name="newPassword">
+                                      </div>
+                                      <div class="form-group">
+                                          <label for="newPassword">Konfirmo fjalëkalimin e ri:</label>
+                                          <input type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm">
+                                      </div>
+                                 </div>
+                                 <div class="modal-footer">
+                                     <button type="button" class="btn btn-secondary cncl-button" data-dismiss="modal">Anulo</button>
+                                     <input type='submit' value="Ruaj" class="btn btn-primary cnfrm-button">
+                                 </div>
+                              </form>
+                          </div>
+                      </div>
+                  </div>
               </div>
          </div>
       </div>
