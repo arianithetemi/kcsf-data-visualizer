@@ -1,27 +1,6 @@
 ---
 ---
 {% include admin/head.html %}
-
-<style>
-
-   .custom-file {
-      padding: 0 15px;
-   }
-
-   #customFile .custom-file-control::after {
-      content: "Zgjedh një dataset...";
-   }
-
-   #customFile .custom-file-control::before {
-      content: "Shto";
-   }
-
-   /*when a value is selected, this class removes the content */
-   .custom-file-control.selected::after {
-      content: "" !important;
-   }
-</style>
-
 <script>
 
    var APIBaseUrl = {{ site.requesturl }}
@@ -34,6 +13,7 @@
    var hashValue = window.location.hash.substr(1);
 
    $(document).ready(() => {
+      // Get logged in admin information
       const getProfile = () => {
          $.ajax({
             url: APIBaseUrl + '/profile',
@@ -54,6 +34,7 @@
          });
       }
 
+      // Check the value of hash and show the proper page
       if(hashValue == '' || hashValue == 'profile') {
          $('#data-cont').hide();
          getProfile();
@@ -64,6 +45,7 @@
          $('#data-cont').show();
       }
 
+      // Clicking on profile link
       $('#profileLink').click(() => {
          $('.nav-item').removeClass('active');
          $('#profileLink').addClass('active');
@@ -72,6 +54,7 @@
          getProfile();
       });
 
+      // Clicking on data link
       $('#dataLink').click(() => {
          $('.nav-item').removeClass('active');
          $('#dataLink').addClass('active');
@@ -79,11 +62,9 @@
          $('#data-cont').show();
       })
 
-
+      // Submitting the form
       $('#import-data-form').on('submit', e => {
          e.preventDefault();
-
-         console.log('submitted!');
       });
    });
 
@@ -143,10 +124,14 @@
                  <div class="col-md-4"></div>
                  <div class="col-md-4">
                      <form id="import-data-form">
-                        <label class="custom-file" id="customFile">
+                        <!-- <label class="custom-file" id="customFile">
                           <input type="file" class="custom-file-input" id="exampleInputFile" aria-describedby="fileHelp">
                           <span class="custom-file-control form-control-file"></span>
-                        </label><br/></br>
+                        </label><br/></br> -->
+                        <div class="form-group">
+                            <label for="school_image">Fajlli i të dhënave:</label>
+                            <input type="file" id="school_image" name="data-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                         </div>
 
                         <button type="submit" class="btn btn-block btn-primary">Importo</button>
                      </form>
