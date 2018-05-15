@@ -26,7 +26,7 @@ $(document).ready(() => {
                window.location.href = "{{ site.basepath }}/dashboard";
                localStorage.setItem('token', data.token);
             } else {
-               alert("Wrong");
+               alert("Email ose fjalëkalimi është gabim!");
             }
          }
       })
