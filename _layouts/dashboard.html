@@ -31,7 +31,7 @@
                'Content-Type': 'application/json',
                'x-access-token': localStorage.getItem('token')
             },
-            crossDomain: true,
+            // crossDomain: true,
             success: data => {
                tokenValidation(data.msg);
                $('#fullName').html(`${data.firstName} ${data.lastName}`);
@@ -240,6 +240,14 @@
                         <div class="form-group">
                            <label for="school_image">Fajlli i të dhënave:</label>
                            <input type="file" id="data-file" name="data-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                        </div>
+                        <div class="form-group">
+                           <label for="school_image">Fajlli i të dhënave per pyetjet:</label>
+                           <input type="file" id="questions-file" name="questions-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                        </div>
+                        <div class="form-group">
+                           <label for="school_image">Fajlli i të dhënave per pergjigjjet:</label>
+                           <input type="file" id="answers-file" name="answers-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
                         </div>
                          <div class="form-group">
                             <label for='year'>

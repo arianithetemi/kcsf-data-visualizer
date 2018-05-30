@@ -1,10 +1,11 @@
 ---
 ---
 
-var url = {{ site.requesturl }} +"comparison";
+var url = {{ site.requesturl }} + "comparison";
+
 $.support.cors = true;
 var language = window.language;
-
+let filter = {};
 // json to name the comparison buttons by survey ID
 var static_compare_buttons = {
     "2": translation_data["Development-Partners"][window.language],
@@ -168,15 +169,38 @@ function addButtonsToCompareCharts(chart_type_container, chart_type, main_indica
 
 // json for posting the attributes to retrieve data from the MongoDB.
 function getPostData(main_indicator, disaggregate_by) {
-    return {
+// getYear()
+    let a =  {
         "q1_id": main_indicator,
         "q2_id": disaggregate_by,
-        "lang": window.language
+        "lang": window.language,
+        "year": filter.year || 2021
     }
+    console.log(a)
+    return a;
+}
+
+function getYear() {
+    $(document).ready(function(){
+        $("#year-indicator-select").ready(function(){
+            console.log($("#year-indicator-select option:selected").val())
+                filter.year = $("#year-indicator-select option:selected").val()
+                displayChart();
+                // window.year = $(this).val();
+            });
+            $('#year-indicator-select').on('change', function(e){
+                // e.preventDefault();
+                console.log($("#year-indicator-select").val());
+                filter.year = $(this).val();
+                displayChart();
+                // alert($(this).val())
+        })
+    })
 }
 
 // displays chart based on the attributes given.
 function displayChart(){
+    console.log(filter.year);
     var active_topic = $(".topic-ul").find(".active").val();
     var active_topic_text = $(".topic-ul").find(".active a").text();
     console.log(active_topic_text);
@@ -194,7 +218,7 @@ function displayChart(){
             }, 350);
         }
             $("#disaggregate-select").parent().parent().hide(350);
-            
+
             displayStaticChart("column-chart-container", static_data[main_indicator], "column-chart", main_indicator.replace("q", ""));
 
     } else {
@@ -205,7 +229,7 @@ function displayChart(){
         }else{
              $("#tab1").prop("disabled", false);
         }
-       
+
         $("#main-indicator-select").parent().parent().css("margin-top", "0px");
         $("#disaggregate-select").parent().parent().show(350);
         if (main_indicator.charAt(0) == "5"){
@@ -243,10 +267,13 @@ $(function () {
     initComparisonChartButtonClick();
     initTopicToggleButton();
     initTopicSelection();
+    getYear();
 });
 
 // initializes the chart radio button click in the document.ready.
 function initChartRadioButtonsClick(){
+
+
     $("input[name='tabs']").change(function () {
         $(".chart").empty();
         $(".comparison-container").remove();
@@ -265,7 +292,7 @@ function initChartRadioButtonsClick(){
                     drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb);
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);  
+                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);
             }
 
         } else {
@@ -277,12 +304,12 @@ function initChartRadioButtonsClick(){
                 }else{
                     disaggregate_by=0;
                    drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb,"y");
-                    //displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by); 
+                    //displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
                 }
-               
+
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);  
+                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
             }
             } else {
                 if (over_percentage_questions.indexOf(main_indicator) != -1){
@@ -295,6 +322,7 @@ function initChartRadioButtonsClick(){
                     post_data["q2_id"] = disaggregate_by;
                     postRequest(url, post_data, checked_rb, chart_type_container, "y");
                 } else {
+                    // console.log("2")
                     postRequest(url, post_data, checked_rb, chart_type_container);
                 }
             }
@@ -355,7 +383,7 @@ function disaggregateSelectBoxChange(){
             if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
                          drawStaticChart(main_indicator,disaggregate_by,chart_type_container,chart_type);
             }else{
-                displayStaticChart(chart_type_container, static_data[main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);  
+                displayStaticChart(chart_type_container, static_data[main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);
                 }
         } else {
             var post_data = getPostData(main_indicator, disaggregate_by);
@@ -378,6 +406,8 @@ function mainIndicatorSelectBoxChange() {
 
 /* Making a post request to the back-end and displaying the chart with it's response. */
 function postRequest(url_post, post_data, chart_type, chart_container, double_questions) {
+    // post_data.year = window.year || 2021
+    console.log(post_data)
     $.ajax({
         type: 'POST',
         url: url_post,

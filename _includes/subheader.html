@@ -4,58 +4,86 @@
             <div class="col-md-2 col-xs-12" style="text-align: center;">
                 <a href=""><img src="../static/images/kcsf-logo.png"></a>
             </div>
-
-            <div class="col-md-8 col-xs-12" style="text-align: center;">
-                <p class="selected_topic" style="font-size:20px;color:#3498db"></p>
-                <form class="form-inline main-indicator-form">
-                    {% if page.language == "english" %}
-                        <label id="main-indicator-label-en" for="main-indicator-select">Main Indicator: </label>
-                    {% elsif page.language == "serbian" %}
-                        <label id="main-indicator-label-sr" for="main-indicator-select">Glavni Pokazatelj: </label>
-                    {% else %}
-                        <label id="main-indicator-label-sq" for="main-indicator-select">Treguesi kryesorë: </label>
-                    {% endif %}
-                    <div class="form-group">
-                        <select id="main-indicator-select" class="form-control select">
-                        </select><br>
-                    </div>
-                </form>
-                <br>
-            </div>
-            <div class="col-md-8 col-xs-12" style="text-align: center;">
-                <form class="form-inline dissagregate-form">
-                    {% if page.language == "english" %}
-                        <label for="disaggregate-select">Disaggregate by: </label>
-                    {% elsif page.language == "serbian" %}
-                        <label for="disaggregate-select">Podele prema: </label>
-                    {% else %}
-                        <label for="disaggregate-select">Ndarja sipas: </label>
-                    {% endif %}
-                    <div class="form-group">
-                        <select id="disaggregate-select" class="form-control select">
+            <div class="col-md-12 col-md-offset-2">
+                <div class="col-md-12">
+                    <div class="col-md-12 col-sm-12 col-lg-6 col-xlg-12 col-xs-12" style="text-align: center;">
+                        <p class="selected_topic" style="font-size:20px;color:#3498db"></p>
+                        <form class="form-inline main-indicator-form">
                             {% if page.language == "english" %}
-                                <option value="0">Disaggregate by</option>
-                                <option value="q2">Location (town/municipality)</option>
-                                <option value="q7">Which is your main area of activity?</option>
-                                <option value="q11">Year of establishment</option>
-                                <option value="q15">Public Beneficiary Status</option>
+                                <label id="main-indicator-label-en" for="main-indicator-select">Main Indicator: </label>
                             {% elsif page.language == "serbian" %}
-                                <option value="0">Podele prema</option>
-                                <option value="q2">Mesto (grad/opština)</option>
-                                <option value="q7">Koje je vaše glavno polje delatnosti?</option>
-                                <option value="q11">Godina osnivanj</option>
-                                <option value="q15">Statusa javnog korisnika</option>
+                                <label id="main-indicator-label-sr" for="main-indicator-select">Glavni Pokazatelj: </label>
                             {% else %}
-                                <option value="0">Ndarja sipas</option>
-                                <option value="q2">Lokacioni (qyteti/komuna)</option>
-                                <option value="q7">Cila është fusha juaj kryesore e veprimtarisë?</option>
-                                <option value="q11">Viti i themelimit</option>
-                                <option value="q15">Statusi per Perfitim Publik</option>
+                                <label id="main-indicator-label-sq" for="main-indicator-select">Treguesi kryesorë: </label>
                             {% endif %}
-                        </select><br><br/>
-                    </div>
-                </form>
+                            <div class="form-group pull-right">
+                                <select id="main-indicator-select" class="form-control select">
+                                </select><br>
+                            </div>
+                        </form>
+                        <br>
+                </div>
             </div>
+            <div class="row">
+                <div class="col-md-12 col-sm-12 col-lg-6 col-xlg-12 col-xs-12" style="text-align: center;">
+                        <form class="form-inline year-indicator-form">
+                                <label id="year-indicator-label-sq" for="year-indicator-select">Viti: </label>
+                            <div class="form-group pull-right">
+                                <select id="year-indicator-select" class="form-control select">
+                                    
+                                        <option value="2016">2016</option>
+                                        <option value="2017">2017</option>
+                                        <option value="2018">2018</option>
+                                        <option value="2019">2019</option>
+                                        <option value="2020">2020</option>
+                                        <option value="2021">2021</option>
+                                        <option value="2022">2022</option>
+                                        <option value="2023">2023</option>
+                                    
+                                </select><br>
+                            </div>
+                        </form>
+                        <br>
+                </div>
+            </div>
+
+
+                    <div class="col-md-12 col-sm-12 col-lg-6 col-xlg-12 col-xs-12"" style="text-align: center;">
+                        <form class="form-inline dissagregate-form">
+                            {% if page.language == "english" %}
+                                <label for="disaggregate-select">Disaggregate by: </label>
+                            {% elsif page.language == "serbian" %}
+                                <label for="disaggregate-select">Podele prema: </label>
+                            {% else %}
+                                <label for="disaggregate-select">Ndarja sipas: </label>
+                            {% endif %}
+                            <div class="form-group pull-right">
+                                <select id="disaggregate-select" class="form-control select">
+                                    {% if page.language == "english" %}
+                                        <option value="0">Disaggregate by</option>
+                                        <option value="q2">Location (town/municipality)</option>
+                                        <option value="q7">Which is your main area of activity?</option>
+                                        <option value="q11">Year of establishment</option>
+                                        <option value="q15">Public Beneficiary Status</option>
+                                    {% elsif page.language == "serbian" %}
+                                        <option value="0">Podele prema</option>
+                                        <option value="q2">Mesto (grad/opština)</option>
+                                        <option value="q7">Koje je vaše glavno polje delatnosti?</option>
+                                        <option value="q11">Godina osnivanj</option>
+                                        <option value="q15">Statusa javnog korisnika</option>
+                                    {% else %}
+                                        <option value="0">Ndarja sipas</option>
+                                        <option value="q2">Lokacioni (qyteti/komuna)</option>
+                                        <option value="q7">Cila është fusha juaj kryesore e veprimtarisë?</option>
+                                        <option value="q11">Viti i themelimit</option>
+                                        <option value="q15">Statusi per Perfitim Publik</option>
+                                    {% endif %}
+                                </select><br><br/>
+                            </div>
+                        </form>
+                    </div>
+            </div>
+    
             <div class="col-md-2 col-xs-12 right-comparision-buttons" style="text-align: center; margin-top: -65px;">
                 <div class="compare-buttons-div" style="display: none;">
                     {% if page.language == "english" %}
