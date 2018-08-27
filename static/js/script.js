@@ -5,7 +5,9 @@ var url = {{ site.requesturl }} + "comparison";
 
 $.support.cors = true;
 var language = window.language;
-let filter = {};
+let filter = {
+    year: '2015-2016'
+};
 // json to name the comparison buttons by survey ID
 var static_compare_buttons = {
     "2": translation_data["Development-Partners"][window.language],
@@ -29,83 +31,149 @@ var static_questions = ["q34", "q35", "q50", "q80", "q117", "q119", "q217", "q22
 
 // structure of topics and the questions within the topics with their dis-aggregate by questions
 var main_indicators = {
-    "6": {
-        "q9": ["q2", "q7", "q11", "q15", "q75"],
-        "q7": ["q2", "q9", "q11", "q15", "q14", "q75"]
+    "2015-2016": {
+        "6": {
+            "q9": ["q2", "q7", "q11", "q15", "q75"],
+            "q7": ["q2", "q9", "q11", "q15", "q14", "q75"]
+        },
+        "2": {
+            "q18": ["q9", "q2", "q7", "q11", "q15", "q14", "q75"],
+            "q22": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q23": ["q9", "q2", "q7", "q11", "q15", "q75"]
+        },
+        "3": {
+            "q34": [],
+            "q35": []
+        },
+        "4": {
+            "q50": [],
+            "5N1": ["0", "Gender", "Age", "Ethnicity"],
+            "5N3": ["0", "Gender", "Age", "Ethnicity" ,"Membership"]
+        },
+        "5": {
+            "q51": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q54": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q56": ["q9", "q2", "q7", "q11", "q15", "q75"]
+        },
+        "1": {
+            "q72": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q73": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q74": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q75": ["q9", "q2", "q7", "q11", "q15", "q36", "q37", "q75", "q124", "q129"],
+            "q76_1": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q76_2": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q77": ["q9", "q2", "q7", "q11", "q15", "q36", "q37", "q75"],
+            "q80": [],
+            "q82": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q84": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q88": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q104": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q109": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q217": [],
+            "q222": [],
+            "q226": [],
+            "q228": []
+        },
+        "7": {
+            "q112": ["q9", "q2", "q7", "q11", "q15", "q75", "q113"],
+            "q117": []
+        },
+        "8": {
+            "q118": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q119": [],
+            "q120": ["q9", "q2", "q7", "q11", "q15", "q75", "q118", "q124", "q136_1"],
+            "q121": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q122": ["q9", "q2", "q7", "q11", "q15", "q75"]
+        },
+        "9": {
+            "q124": ["q9", "q2", "q7", "q11", "q15", "q75", "q136_1", "q118"],
+            "q126": ["q9", "q2", "q7", "q11", "q15", "q75", "q124", "q136_1"],
+            "q127": ["q9", "q2", "q7", "q11", "q15", "q75", "q118"],
+            "q128": ["q9", "q2", "q7", "q11", "q15", "q75", "q118"]
+        },
+        "10": {
+            "q65": ["q9", "q2", "q7", "q11", "q15", "q75"]
+        },
+        "11": {
+            "q136_1": ["q9", "q2", "q7", "q11", "q15", "q75"]
+        },
+        "12": {
+            "q138": ["q9", "q2", "q7", "q11", "q15", "q75"],
+            "q407": [],
+            "5A7_5": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
+            "5N4": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
+            "5C15": ["0","Gender", "Age", "Ethnicity" ,"Membership"]
+        }
     },
-    "2": {
-        "q18": ["q9", "q2", "q7", "q11", "q15", "q14", "q75"],
-        "q22": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q23": ["q9", "q2", "q7", "q11", "q15", "q75"]
-    },
-    "3": {
-        "q34": [],
-        "q35": []
-    },
-    "4": {
-        "q50": [],
-        "5N1": ["0", "Gender", "Age", "Ethnicity"],
-        "5N3": ["0", "Gender", "Age", "Ethnicity" ,"Membership"]
-    },
-    "5": {
-        "q51": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q54": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q56": ["q9", "q2", "q7", "q11", "q15", "q75"]
-    },
-    "1": {
-        "q72": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q73": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q74": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q75": ["q9", "q2", "q7", "q11", "q15", "q36", "q37", "q75", "q124", "q129"],
-        "q76_1": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q76_2": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q77": ["q9", "q2", "q7", "q11", "q15", "q36", "q37", "q75"],
-        "q80": [],
-        "q82": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q84": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q88": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q104": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q109": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q217": [],
-        "q222": [],
-        "q226": [],
-        "q228": []
-    },
-    "7": {
-        "q112": ["q9", "q2", "q7", "q11", "q15", "q75", "q113"],
-        "q117": []
-    },
-    "8": {
-        "q118": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q119": [],
-        "q120": ["q9", "q2", "q7", "q11", "q15", "q75", "q118", "q124", "q136_1"],
-        "q121": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q122": ["q9", "q2", "q7", "q11", "q15", "q75"]
-    },
-    "9": {
-        "q124": ["q9", "q2", "q7", "q11", "q15", "q75", "q136_1", "q118"],
-        "q126": ["q9", "q2", "q7", "q11", "q15", "q75", "q124", "q136_1"],
-        "q127": ["q9", "q2", "q7", "q11", "q15", "q75", "q118"],
-        "q128": ["q9", "q2", "q7", "q11", "q15", "q75", "q118"]
-    },
-    "10": {
-        "q65": ["q9", "q2", "q7", "q11", "q15", "q75"]
-    },
-    "11": {
-        "q136_1": ["q9", "q2", "q7", "q11", "q15", "q75"]
-    },
-    "12": {
-        "q138": ["q9", "q2", "q7", "q11", "q15", "q75"],
-        "q407": [],
-        "5A7_5": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
-        "5N4": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
-        "5C15": ["0","Gender", "Age", "Ethnicity" ,"Membership"]
+    "2017-2018": {
+        "6": {
+            "q9": ["q2", "q7", "q11", "q15", "q67"],
+            "q7": ["q2", "q9", "q11", "q15", "q14", "q67"]
+        },
+        "2": {
+            "q18": ["q9", "q2", "q7", "q11", "q15", "q14", "q67"],
+            "q22": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q23": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "3": {
+            "q34": [],
+            "q35": []
+        },
+        "4": {
+            "q50": [],
+            "5N1": ["0", "Gender", "Age", "Ethnicity"],
+            "5N3": ["0", "Gender", "Age", "Ethnicity" ,"Membership"]
+        },
+        "5": {
+            "q45": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q48": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q50": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "1": {
+            "q64": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q65": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q66": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q67": ["q9", "q2", "q7", "q11", "q15", "q33", "q34", "q67", "q108", "q114"],
+            "q68": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q69": ["q9", "q2", "q7", "q11", "q15", "q33", "q34", "q67"],
+            "q74": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q78": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q94": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "7": {
+            "q96": ["q9", "q2", "q7", "q11", "q15", "q67", "q97"],
+        },
+        "8": {
+            "q102": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q103": [],
+            "q104": ["q9", "q2", "q7", "q11", "q15", "q67", "q102", "q108", "q121"],
+            "q105": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q106": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "9": {
+            "q108": ["q9", "q2", "q7", "q11", "q15", "q75", "q121", "q102"],
+            "q111": ["q9", "q2", "q7", "q11", "q15", "q67", "q108", "q121"],
+            "q112": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"],
+            "q113": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"]
+        },
+        "10": {
+            "q58": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "11": {
+            "q121": ["q9", "q2", "q7", "q11", "q15", "q67"]
+        },
+        "12": {
+            "q124": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "5A7_5": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
+            "5N4": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
+            "5C15": ["0","Gender", "Age", "Ethnicity" ,"Membership"]
+        }
     }
 };
 
 // adds all of the topics in the left side div of topics.
 function addTopicList(){
-    for (var topic in main_indicators){
+    for (var topic in main_indicators[filter.year]){
         var topic_name = topics[topic][window.language];
         var list_item = "";
         if (topic == "1"){
@@ -120,11 +188,14 @@ function addTopicList(){
 // populates main indicator select box based on the topic they belong.
 function populateMainIndicatorSelectBoxes(topic) {
     $("#main-indicator-select").empty();
-    for (var indicator in main_indicators[topic]) {
+    for (var indicator in main_indicators[filter.year][topic]) {
         var indicator_str = indicator.replace("q", "");
-        var option = translation_data[indicator_str][language];
-        var option_html = "<option value='" + indicator + "'>" + option + "</option>";
-        $("#main-indicator-select").append(option_html);
+        console.log(language)
+        if(translation_data[indicator_str] != null){
+            var option = translation_data[indicator_str][language];
+            var option_html = "<option value='" + indicator + "'>" + option + "</option>";
+            $("#main-indicator-select").append(option_html);
+        }
     }
 }
 
@@ -135,11 +206,15 @@ function populateDisaggregateSelectBox(indicator, topic, is_undp_data) {
         var option_html = "<option value='0'>" + translation_data[0][window.language] + "</option>";
     }
     $("#disaggregate-select").append(option_html);
-    for (var i = 0; i < main_indicators[topic][indicator].length; i++) {
-        var q_id = main_indicators[topic][indicator][i];
-        var option = translation_data[q_id.replace("q", "")][language];
-        var option_html = "<option value='" + q_id + "'>" + option + "</option>";
-        $("#disaggregate-select").append(option_html);
+    if(main_indicators[filter.year][topic][indicator] != undefined) {
+        for (var i = 0; i < main_indicators[filter.year][topic][indicator].length; i++) {
+            var q_id = main_indicators[filter.year][topic][indicator][i];
+            if(translation_data[q_id.replace("q", "")] != null){
+                var option = translation_data[q_id.replace("q", "")][language];
+                var option_html = "<option value='" + q_id + "'>" + option + "</option>";
+                $("#disaggregate-select").append(option_html);
+            }
+        }
     }
 }
 
@@ -162,7 +237,7 @@ function addButtonsToCompareCharts(chart_type_container, chart_type, main_indica
             "float": "none"
         });
         if (static_questions.indexOf(main_indicator) != -1) {
-            displayStaticChart(chart_type_container, static_data[main_indicator], chart_type, main_indicator.replace("q", ""));
+            displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""));
         }
     }
 }
@@ -170,11 +245,15 @@ function addButtonsToCompareCharts(chart_type_container, chart_type, main_indica
 // json for posting the attributes to retrieve data from the MongoDB.
 function getPostData(main_indicator, disaggregate_by) {
 // getYear()
+  
     let a =  {
         "q1_id": main_indicator,
         "q2_id": disaggregate_by,
         "lang": window.language,
-        "year": filter.year || 2021
+        "year": filter.year || 2018
+    }
+    if(disaggregate_by == undefined){
+        a.q2_id = '';
     }
     console.log(a)
     return a;
@@ -192,6 +271,8 @@ function getYear() {
                 // e.preventDefault();
                 console.log($("#year-indicator-select").val());
                 filter.year = $(this).val();
+                var active_topic = $(".topic-ul").find(".active").val();
+                populateMainIndicatorSelectBoxes(active_topic);
                 displayChart();
                 // alert($(this).val())
         })
@@ -219,7 +300,7 @@ function displayChart(){
         }
             $("#disaggregate-select").parent().parent().hide(350);
 
-            displayStaticChart("column-chart-container", static_data[main_indicator], "column-chart", main_indicator.replace("q", ""));
+            displayStaticChart("column-chart-container", static_data['2015-2016'][main_indicator], "column-chart", main_indicator.replace("q", ""));
 
     } else {
         if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
@@ -292,7 +373,7 @@ function initChartRadioButtonsClick(){
                     drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb);
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);
+                    displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);
             }
 
         } else {
@@ -309,7 +390,7 @@ function initChartRadioButtonsClick(){
 
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data[main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
+                    displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
             }
             } else {
                 if (over_percentage_questions.indexOf(main_indicator) != -1){
@@ -364,10 +445,10 @@ function initComparisonChartButtonClick(){
                 postRequest(url, post_data, chart_type, chart_type_container);
             }
         } else {
-            displayStaticChart(chart_type_container, static_data[main_indicator], chart_type, main_indicator.replace("q", ""));
+            displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""));
         }
 
-        displayStaticChart("comparison-chart-container", static_data[q_id], chart_type, q_id.replace("q", ""), {static_question:q_id});
+        displayStaticChart("comparison-chart-container", static_data['2015-2016'][q_id], chart_type, q_id.replace("q", ""), {static_question:q_id});
     });
 }
 
@@ -383,7 +464,7 @@ function disaggregateSelectBoxChange(){
             if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
                          drawStaticChart(main_indicator,disaggregate_by,chart_type_container,chart_type);
             }else{
-                displayStaticChart(chart_type_container, static_data[main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);
+                displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);
                 }
         } else {
             var post_data = getPostData(main_indicator, disaggregate_by);
@@ -407,6 +488,9 @@ function mainIndicatorSelectBoxChange() {
 /* Making a post request to the back-end and displaying the chart with it's response. */
 function postRequest(url_post, post_data, chart_type, chart_container, double_questions) {
     // post_data.year = window.year || 2021
+    if(post_data.q2_id ===  undefined) {
+        post_data.q2_id = '';
+     }
     console.log(post_data)
     $.ajax({
         type: 'POST',
@@ -545,7 +629,7 @@ function initTopicSelection(){
            }
         });
         $("#show").click();
-        var main_indicator = getFirstIndicator(main_indicators[topic]);
+        var main_indicator = getFirstIndicator(main_indicators[filter.year][topic]);
         $(".comparison-container").remove();
         $(".chart").css({
             "width": "",
