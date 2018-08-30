@@ -10,9 +10,9 @@ let filter = {
 };
 // json to name the comparison buttons by survey ID
 var static_compare_buttons = {
-    "2": translation_data["Development-Partners"][window.language],
-    "3": translation_data["CSO-Network"][window.language],
-    "4": translation_data["External"][window.language]
+    "2": translation_data[filter.year]["Development-Partners"][window.language],
+    "3": translation_data[filter.year]["CSO-Network"][window.language],
+    "4": translation_data[filter.year]["External"][window.language]
 };
 
 // questions which total is more than 100%;
@@ -27,7 +27,10 @@ var comparison_questions = {
 };
 
 // questions with static data.
-var static_questions = ["q34", "q35", "q50", "q80", "q117", "q119", "q217", "q222", "q226", "q228", "q407"];
+var static_questions = {
+    "2015-2016":["q34", "q35", "q50", "q80", "q117", "q119", "q217", "q222", "q226", "q228", "q407"],
+    "2017-2018": ["q32","q72", "q103", "q203", "q227", "q231", "q407"]
+};
 
 // structure of topics and the questions within the topics with their dis-aggregate by questions
 var main_indicators = {
@@ -116,11 +119,9 @@ var main_indicators = {
             "q23": ["q9", "q2", "q7", "q11", "q15", "q67"]
         },
         "3": {
-            "q34": [],
-            "q35": []
+            "q32": []
         },
         "4": {
-            "q50": [],
             "5N1": ["0", "Gender", "Age", "Ethnicity"],
             "5N3": ["0", "Gender", "Age", "Ethnicity" ,"Membership"]
         },
@@ -136,9 +137,12 @@ var main_indicators = {
             "q67": ["q9", "q2", "q7", "q11", "q15", "q33", "q34", "q67", "q108", "q114"],
             "q68": ["q9", "q2", "q7", "q11", "q15", "q67"],
             "q69": ["q9", "q2", "q7", "q11", "q15", "q33", "q34", "q67"],
+            "q72": [],
             "q74": ["q9", "q2", "q7", "q11", "q15", "q67"],
             "q78": ["q9", "q2", "q7", "q11", "q15", "q67"],
-            "q94": ["q9", "q2", "q7", "q11", "q15", "q67"]
+            "q94": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q227": [],
+            "q231": [],
         },
         "7": {
             "q96": ["q9", "q2", "q7", "q11", "q15", "q67", "q97"],
@@ -151,7 +155,7 @@ var main_indicators = {
             "q106": ["q9", "q2", "q7", "q11", "q15", "q67"]
         },
         "9": {
-            "q108": ["q9", "q2", "q7", "q11", "q15", "q75", "q121", "q102"],
+            "q108": ["q9", "q2", "q7", "q11", "q15", "q67", "q121", "q103"],
             "q111": ["q9", "q2", "q7", "q11", "q15", "q67", "q108", "q121"],
             "q112": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"],
             "q113": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"]
@@ -164,6 +168,7 @@ var main_indicators = {
         },
         "12": {
             "q124": ["q9", "q2", "q7", "q11", "q15", "q67"],
+            "q407": [],
             "5A7_5": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
             "5N4": ["0","Gender", "Age", "Ethnicity" ,"Membership"],
             "5C15": ["0","Gender", "Age", "Ethnicity" ,"Membership"]
@@ -191,11 +196,10 @@ function populateMainIndicatorSelectBoxes(topic) {
     for (var indicator in main_indicators[filter.year][topic]) {
         var indicator_str = indicator.replace("q", "");
         console.log(language)
-        if(translation_data[indicator_str] != null){
-            var option = translation_data[indicator_str][language];
-            var option_html = "<option value='" + indicator + "'>" + option + "</option>";
-            $("#main-indicator-select").append(option_html);
-        }
+        var option = translation_data[filter.year][indicator_str][language];
+        var option_html = "<option value='" + indicator + "'>" + option + "</option>";
+        $("#main-indicator-select").append(option_html);
+    
     }
 }
 
@@ -203,18 +207,16 @@ function populateMainIndicatorSelectBoxes(topic) {
 function populateDisaggregateSelectBox(indicator, topic, is_undp_data) {
     $("#disaggregate-select").empty();
     if (is_undp_data != true) {
-        var option_html = "<option value='0'>" + translation_data[0][window.language] + "</option>";
+        var option_html = "<option value='0'>" + translation_data[filter.year][0][window.language] + "</option>";
     }
     $("#disaggregate-select").append(option_html);
-    if(main_indicators[filter.year][topic][indicator] != undefined) {
-        for (var i = 0; i < main_indicators[filter.year][topic][indicator].length; i++) {
-            var q_id = main_indicators[filter.year][topic][indicator][i];
-            if(translation_data[q_id.replace("q", "")] != null){
-                var option = translation_data[q_id.replace("q", "")][language];
-                var option_html = "<option value='" + q_id + "'>" + option + "</option>";
-                $("#disaggregate-select").append(option_html);
-            }
-        }
+
+    for (var i = 0; i < main_indicators[filter.year][topic][indicator].length; i++) {
+        var q_id = main_indicators[filter.year][topic][indicator][i];
+        var option = translation_data[filter.year][q_id.replace("q", "")][language];
+        console.log(option);
+        var option_html = "<option value='" + q_id + "'>" + option + "</option>";
+        $("#disaggregate-select").append(option_html);          
     }
 }
 
@@ -222,7 +224,7 @@ function populateDisaggregateSelectBox(indicator, topic, is_undp_data) {
 function addButtonsToCompareCharts(chart_type_container, chart_type, main_indicator) {
     if (main_indicator in comparison_questions){
         $(".compare-buttons-div").empty();
-        $(".compare-buttons-div").append("<h6>"+translation_data["Comparison"][window.language]+"</h6>");
+        $(".compare-buttons-div").append("<h6>"+translation_data[filter.year]["Comparison"][window.language]+"</h6>");
         for (var item in comparison_questions[main_indicator]){
             var q_id = comparison_questions[main_indicator][item];
             var button_html = "<button id='"+ q_id +"' class='btn btn-default btn-compare'>"+static_compare_buttons[q_id.charAt(0)]+"</button><br>";
@@ -236,8 +238,8 @@ function addButtonsToCompareCharts(chart_type_container, chart_type, main_indica
             "width": "",
             "float": "none"
         });
-        if (static_questions.indexOf(main_indicator) != -1) {
-            displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""));
+        if (static_questions[filter.year].indexOf(main_indicator) != -1) {
+            displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], chart_type, main_indicator.replace("q", ""));
         }
     }
 }
@@ -287,10 +289,11 @@ function displayChart(){
     console.log(active_topic_text);
     $('.selected_topic').html(active_topic_text);
     var main_indicator = $("#main-indicator-select").val();
+    console.log(main_indicator);
     var chart_type = $('input[name=tabs]:checked').val();
     var chart_type_container = chart_type + "-container";
     addButtonsToCompareCharts(chart_type_container, chart_type, main_indicator);
-    if (static_questions.indexOf(main_indicator) != -1) {
+    if (static_questions[filter.year].indexOf(main_indicator) != -1) {
         $("#tab3").click();
         $("#tab1").prop("disabled", true);
         if (window.screen.width > 768) {
@@ -300,7 +303,7 @@ function displayChart(){
         }
             $("#disaggregate-select").parent().parent().hide(350);
 
-            displayStaticChart("column-chart-container", static_data['2015-2016'][main_indicator], "column-chart", main_indicator.replace("q", ""));
+            displayStaticChart("column-chart-container", static_data[filter.year][main_indicator], "column-chart", main_indicator.replace("q", ""));
 
     } else {
         if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
@@ -366,14 +369,14 @@ function initChartRadioButtonsClick(){
             "max-width": "800px",
             "float": "none"
         });
-        if (static_questions.indexOf(main_indicator) != -1) {
+        if (static_questions[filter.year].indexOf(main_indicator) != -1) {
             var disaggregate_by_lang = $("#disaggregate-select option:selected" ).text();
             if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
                 $("#tab1").prop("disabled", false);
                     drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb);
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);
+                    displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by_lang);
             }
 
         } else {
@@ -390,7 +393,7 @@ function initChartRadioButtonsClick(){
 
             }else{
                 $("#tab1").prop("disabled", true);
-                    displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
+                    displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], checked_rb, main_indicator.replace("q", ""),disaggregate_by);
             }
             } else {
                 if (over_percentage_questions.indexOf(main_indicator) != -1){
@@ -436,7 +439,7 @@ function initComparisonChartButtonClick(){
             "width": chart_width,
             "float": "left"
         });
-        if (static_questions.indexOf(main_indicator) == -1) {
+        if (static_questions[filter.year].indexOf(main_indicator) == -1) {
             var post_data = getPostData(main_indicator, "");
             if (disaggregate_by != "0") {
                 post_data["q2_id"] = disaggregate_by;
@@ -445,10 +448,10 @@ function initComparisonChartButtonClick(){
                 postRequest(url, post_data, chart_type, chart_type_container);
             }
         } else {
-            displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""));
+            displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], chart_type, main_indicator.replace("q", ""));
         }
 
-        displayStaticChart("comparison-chart-container", static_data['2015-2016'][q_id], chart_type, q_id.replace("q", ""), {static_question:q_id});
+        displayStaticChart("comparison-chart-container", static_data[filter.year][q_id], chart_type, q_id.replace("q", ""), {static_question:q_id});
     });
 }
 
@@ -464,7 +467,7 @@ function disaggregateSelectBoxChange(){
             if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
                          drawStaticChart(main_indicator,disaggregate_by,chart_type_container,chart_type);
             }else{
-                displayStaticChart(chart_type_container, static_data['2015-2016'][main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);
+                displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);
                 }
         } else {
             var post_data = getPostData(main_indicator, disaggregate_by);
