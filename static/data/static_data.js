@@ -3149,6 +3149,66 @@ var static_data = {
         }
       }
     },
+    q69:{
+      question: {
+        en: translation_data["2017-2018"]["103"]["en"],
+        sq: translation_data["2017-2018"]["103"]["sq"],
+        sr: translation_data["2017-2018"]["103"]["sr"]
+      },
+      answer:{
+        en: {
+          "Technical assistance":{
+              number:"10",
+          },
+          "Institutional grants":{
+            number:"39"
+          },
+          "Grants for projects":{
+            number:"148"
+          },
+          "Service contracts":{
+            number:"30"
+          },
+          "Other":{
+            number:"14"
+          }
+        },
+        sq: {
+          "Asistencë teknike":{
+              number:"10",
+          },
+          "Grante institucionale":{
+            number:"39"
+          },
+          "Grante për projekte":{
+            number:"148"
+          },
+          "Kontrata për shërbime":{
+            number:"30"
+          },
+          "Tjetër":{
+            number:"14"
+          }
+        },
+        sr: {
+          "Tehničku pomoć":{
+              number:"10",
+          },
+          "Institucionalne grantove":{
+            number:"39"
+          },
+          "Grantove za projekte":{
+            number:"148"
+          },
+          "Ugovor za pružanje usluga":{
+            number:"30"
+          },
+          "Ostalo":{
+            number:"14"
+          }
+        }
+      }
+    },
     q103: {
       question: {
         en: translation_data["2017-2018"]["103"]["en"],

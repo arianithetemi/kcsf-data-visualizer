@@ -45,7 +45,6 @@ var drawStaticChart = parameterfy(function(
   var drilldown_series = [];
   var duplicates = [];
   var dataSum = 0;
-  console.log(static_data[main_indicator]["answer"][window.language][0]);
   for (var a in static_data[filter.year][main_indicator]["answer"][
     window.language
   ][0]) {
