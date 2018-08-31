@@ -45,7 +45,7 @@ var drawStaticChart = parameterfy(function(
   var drilldown_series = [];
   var duplicates = [];
   var dataSum = 0;
-  //console.log(static_data[main_indicator]['answer'][window.language][0]);
+  console.log(static_data[main_indicator]["answer"][window.language][0]);
   for (var a in static_data[filter.year][main_indicator]["answer"][
     window.language
   ][0]) {
@@ -769,6 +769,7 @@ var drawChart = parameterfy(function(
       events: {
         drilldown: function() {
           var e1 = document.getElementById("disaggregate-select");
+          console.log(e1);
           var question_id = e1.options[e1.selectedIndex].value;
           var question_title = e1.options[e1.selectedIndex].text;
           var title = getChartTitle(

@@ -41,34 +41,34 @@
 
 
                 <div class="col-md-12 col-sm-12 col-lg-6 col-xlg-12 col-xs-12" " style="text-align: center; ">
-                        <form class="form-inline dissagregate-form ">
-                            {% if page.language == "english " %}
-                                <label for="disaggregate-select ">Disaggregate by: </label>
-                            {% elsif page.language == "serbian " %}
-                                <label for="disaggregate-select ">Podele prema: </label>
+                        <form class="form-inline dissagregate-form">
+                            {% if page.language == "english" %}
+                                <label for="disaggregate-select">Disaggregate by: </label>
+                            {% elsif page.language == "serbian" %}
+                                <label for="disaggregate-select">Podele prema: </label>
                             {% else %}
-                                <label for="disaggregate-select ">Ndarja sipas: </label>
+                                <label for="disaggregate-select">Ndarja sipas: </label>
                             {% endif %}
-                            <div class="form-group pull-right ">
-                                <select id="disaggregate-select " class="form-control select ">
+                            <div class="form-group pull-right">
+                                <select id="disaggregate-select" class="form-control select ">
                                     {% if page.language == "english " %}
-                                        <option value="0 ">Disaggregate by</option>
-                                        <option value="q2 ">Location (town/municipality)</option>
-                                        <option value="q7 ">Which is your main area of activity?</option>
-                                        <option value="q11 ">Year of establishment</option>
-                                        <option value="q15 ">Public Beneficiary Status</option>
+                                        <option value="0">Disaggregate by</option>
+                                        <option value="q2">Location (town/municipality)</option>
+                                        <option value="q7">Which is your main area of activity?</option>
+                                        <option value="q11">Year of establishment</option>
+                                        <option value="q15">Public Beneficiary Status</option>
                                     {% elsif page.language == "serbian " %}
-                                        <option value="0 ">Podele prema</option>
-                                        <option value="q2 ">Mesto (grad/opština)</option>
-                                        <option value="q7 ">Koje je vaše glavno polje delatnosti?</option>
-                                        <option value="q11 ">Godina osnivanj</option>
-                                        <option value="q15 ">Statusa javnog korisnika</option>
+                                        <option value="0">Podele prema</option>
+                                        <option value="q2">Mesto (grad/opština)</option>
+                                        <option value="q7">Koje je vaše glavno polje delatnosti?</option>
+                                        <option value="q11">Godina osnivanj</option>
+                                        <option value="q15">Statusa javnog korisnika</option>
                                     {% else %}
-                                        <option value="0 ">Ndarja sipas</option>
-                                        <option value="q2 ">Lokacioni (qyteti/komuna)</option>
-                                        <option value="q7 ">Cila është fusha juaj kryesore e veprimtarisë?</option>
-                                        <option value="q11 ">Viti i themelimit</option>
-                                        <option value="q15 ">Statusi per Perfitim Publik</option>
+                                        <option value="0">Ndarja sipas</option>
+                                        <option value="q2">Lokacioni (qyteti/komuna)</option>
+                                        <option value="q7">Cila është fusha juaj kryesore e veprimtarisë?</option>
+                                        <option value="q11">Viti i themelimit</option>
+                                        <option value="q15">Statusi per Perfitim Publik</option>
                                     {% endif %}
                                 </select><br><br/>
                             </div>
