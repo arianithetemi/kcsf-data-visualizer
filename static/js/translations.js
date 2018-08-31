@@ -583,10 +583,10 @@ var translation_data = {
       en: "Reporting to the TAK"
     },
     "26": {
-      sr: "Koliko ste spoljnih finansijskih revizija imali 2015. godine?",
-      sq: "Sa auditime të jashtme financiare i keni pasur gjatë vitit 2015?",
+      sr: "Koliko ste spoljnih finansijskih revizija imali 2017. godine?",
+      sq: "Sa auditime të jashtme financiare i keni pasur gjatë vitit 2017?",
       en:
-        "How many external financial audits have you had during the year 2015?"
+        "How many external financial audits have you had during the year 2017?"
     },
     "27": {
       sr: "Da li poseduje vaša organizacija sledeća dokumenta?",
@@ -617,8 +617,8 @@ var translation_data = {
     },
     "43": {
       sr:
-        "Da li ste angažovali volontere u vašoj organizaciji u toku 2015.godine?",
-      sq: "A keni angazhuar vullnetarë gjatë vitit 2015 në organizatën tuaj?",
+        "Da li ste angažovali volontere u vašoj organizaciji u toku 2017.godine?",
+      sq: "A keni angazhuar vullnetarë gjatë vitit 2017 në organizatën tuaj?",
       en: "Does the subject of civil education promote this engagement?"
     },
     "45": {
@@ -662,12 +662,9 @@ var translation_data = {
       en: "Annual revenue"
     },
     "68": {
-      sr:
-        "U poređenju sa prošlom godinom koji su prihodi i rashodi vaše organizacije u 2015 godini....",
-      sq:
-        "Në krahasim me vitin e kaluar, të ardhurat dhe shpenzimet e organizatës suaj në vitin 2015....",
-      en:
-        "Compared to last year, the revenues and expenses of your organization in 2015...."
+      sr: "Prihodi (2017)",
+      sq: "Të ardhurat (2017)",
+      en: "Revenues (2017)"
     },
     "69": {
       sr: "Vrsta primljenih finansijskih podrška",
@@ -680,14 +677,14 @@ var translation_data = {
       en: "Financial support by sources of funding"
     },
     "74": {
-      sr: "Prihvatanje fondova iz EU (2015)",
-      sq: "Pranimi i fondeve nga BE (2015)",
-      en: "Reception of EU funds (2015)"
+      sr: "Prihvatanje fondova iz EU (2017)",
+      sq: "Pranimi i fondeve nga BE (2017)",
+      en: "Reception of EU funds (2017)"
     },
     "78": {
-      sr: "Prihvatanje državnih fondova (2015)",
-      sq: "Pranimi i fondeve shtetërore (2015)",
-      en: "Reception of state funds (2015)"
+      sr: "Prihvatanje državnih fondova (2017)",
+      sq: "Pranimi i fondeve shtetërore (2017)",
+      en: "Reception of state funds (2017)"
     },
     "94": {
       sr: "Prodaje proizvoda i usluga",
@@ -759,19 +756,19 @@ var translation_data = {
     },
     "119": {
       sr:
-        "Kakav je bio uticaj civilnog društva na Kosovu u sledećim oblastima tokom 2015. godine?",
+        "Kakav je bio uticaj civilnog društva na Kosovu u sledećim oblastima tokom 2017. godine?",
       sq:
-        "Cili ka qenë ndikimi i shoqërisë civile në Kosovë në fushat e mëposhtme gjatë vitit 2015?",
+        "Cili ka qenë ndikimi i shoqërisë civile në Kosovë në fushat e mëposhtme gjatë vitit 2017?",
       en:
-        "What was the impact of civil society in Kosovo concerning the fields below in 2015?"
+        "What was the impact of civil society in Kosovo concerning the fields below in 2017?"
     },
     "120": {
       sr:
-        "U kojoj oblasti mislite da je vaša organizacija imala najviše uticaja u toku 2015 godine?",
+        "U kojoj oblasti mislite da je vaša organizacija imala najviše uticaja u toku 2017 godine?",
       sq:
-        "Në cilën fushë mendoni se ka pasur organizata juaj më së tepërmi ndikim gjatë vitit 2015?",
+        "Në cilën fushë mendoni se ka pasur organizata juaj më së tepërmi ndikim gjatë vitit 2017?",
       en:
-        "In which field you do believe your organizationhad its highest impact in 2015?"
+        "In which field you do believe your organizationhad its highest impact in 2017?"
     },
     "124": {
       sr: "Procena OCD na spoljašnje sredine",
@@ -785,16 +782,6 @@ var translation_data = {
         "Sipas mendimit tuaj, çfarë është imazhi i shoqërisë civile në publikun e gjerë në Kosovë?",
       en:
         "What is your opinion on the civil society image in the general public of Kosovo?"
-    },
-    "76_1": {
-      sr: "Prihodi (2015)",
-      sq: "Të ardhurat (2015)",
-      en: "Revenues (2015)"
-    },
-    "76_2": {
-      sr: "Troškovi (2015)",
-      sq: "Shpenzimet (2015) ",
-      en: "Expenses (2015)"
     },
     ID: {
       sr: "sr",
@@ -828,14 +815,14 @@ var translation_data = {
     },
     "225": {
       sq:
-        "Çfarë lloji të përkrahjes financiare ju keni dhënë OShC-ve gjatë 2015?",
-      en: "What type of financial support did you provide to CSOs during 2015?",
+        "Çfarë lloji të përkrahjes financiare ju keni dhënë OShC-ve gjatë 2017?",
+      en: "What type of financial support did you provide to CSOs during 2017?",
       sr: "Veličina korisnika OCD fondova "
     },
     "227": {
-      sq: "Madhësia e fondeve të 2017 krahasuar me vitin 2018",
-      en: "Size of funds for 2017 compared to 2018",
-      sr: "Veličina fondova za 2017. u poređenju sa 2018a"
+      sq: "Madhësia e fondeve të 2017 krahasuar me vitin 2016",
+      en: "Size of funds for 2017 compared to 2016",
+      sr: "Veličina fondova za 2017. u poređenju sa 2016"
     },
     "231": {
       sq: "Përceptimi i donatorëve rreth procedurave të aplikimit",
