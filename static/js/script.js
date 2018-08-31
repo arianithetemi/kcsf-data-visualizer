@@ -20,10 +20,18 @@ var over_percentage_questions = ["q77", "q22", "q7", "q128"];
 
 // questions which have another questions from another surveys that can be compared.
 var comparison_questions = {
+  "2015-2016":{
     "q35": ["313", "229"],
     "q77": ["220"],
     "q112": ["207", "208"],
     "q138": ["414", "235"]
+  },
+  "2017-2018":{
+    "q32": ["234"],
+    "q69": ["225"],
+    "q96": ["207"],
+    "q124": ["414"]
+  }
 };
 
 // questions with static data.
@@ -155,9 +163,9 @@ var main_indicators = {
             "q106": ["q9", "q2", "q7", "q11", "q15", "q67"]
         },
         "9": {
-            "q108": ["q9", "q2", "q7", "q11", "q15", "q67", "q121", "q103"],
+            "q108": ["q9", "q2", "q7", "q11", "q15", "q67", "q121", "q102"],
             "q111": ["q9", "q2", "q7", "q11", "q15", "q67", "q108", "q121"],
-            "q112": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"],
+            "q112": ["q9", "q2", "q7", "q11", "q15", "q67", "q103"],
             "q113": ["q9", "q2", "q7", "q11", "q15", "q67", "q102"]
         },
         "10": {
@@ -222,11 +230,11 @@ function populateDisaggregateSelectBox(indicator, topic, is_undp_data) {
 
 // if question in main indicator can be compared to another survey questions than display a button to compare
 function addButtonsToCompareCharts(chart_type_container, chart_type, main_indicator) {
-    if (main_indicator in comparison_questions){
+    if (main_indicator in comparison_questions[filter.year]){
         $(".compare-buttons-div").empty();
         $(".compare-buttons-div").append("<h6>"+translation_data[filter.year]["Comparison"][window.language]+"</h6>");
-        for (var item in comparison_questions[main_indicator]){
-            var q_id = comparison_questions[main_indicator][item];
+        for (var item in comparison_questions[filter.year][main_indicator]){
+            var q_id = comparison_questions[filter.year][main_indicator][item];
             var button_html = "<button id='"+ q_id +"' class='btn btn-default btn-compare'>"+static_compare_buttons[q_id.charAt(0)]+"</button><br>";
             $(".compare-buttons-div").append(button_html);
         }
