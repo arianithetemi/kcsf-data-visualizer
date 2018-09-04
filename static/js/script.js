@@ -1,7 +1,7 @@
 ---
 ---
 
-var url = {{ site.requesturl }} + "comparison";
+var url = {{ site.requesturl }} + "/comparison";
 
 $.support.cors = true;
 var language = window.language;

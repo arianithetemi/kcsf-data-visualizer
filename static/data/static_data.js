@@ -2990,113 +2990,85 @@ var static_data = {
       answer: {
         en: {
           "Writing project-proposals": {
-            High: 88,
-            Medium: 92,
-            Low: 22
+            High: '43.35' ,
+            Medium: '45.32',
+            Low: '10.84'
           },
           "Findings donors/fund-raising": {
-            High: 60,
-            Medium: 94,
-            Low: 48
+            High: '29.56',
+            Medium: '46.31',
+            Low: '23.65'
           },
           "Implementation/ operational management of projects": {
-            High: 104,
-            Medium: 74,
-            Low: 24
+            High: '51.23',
+            Medium: '36.45',
+            Low: '11.82'
           },
           "Community mobilization": {
-            High: 116,
-            Medium: 66,
-            Low: 20
+            High: '57.14',
+            Medium: '32.51',
+            Low: '9.85'
           },
           "Public communication": {
-            High: 124,
-            Medium: 66,
-            Low: 12
+            High: '61.08',
+            Medium: '32.51',
+            Low: '5.91'
           },
           "Financial Management of projects": {
-            High: 108,
-            Medium: 70,
-            Low: 24
+            High: '53.20',
+            Medium: '34.48',
+            Low: '11.82'
           },
           "Organizational management": {
-            High: 124,
-            Medium: 66,
-            Low: 12
+            High: '61.08',
+            Medium: '32.51',
+            Low: '5.91'
           }
         },
         sq: {
-          "Shkrim të projekt-propozimeve": {
-            "I lartë": 88,
-            Mesatar: 92,
-            "I ulët": 22
-          },
-          "Gjetje të donatorëve/ngritje të fondeve": {
-            "I lartë": 60,
-            Mesatar: 94,
-            "I ulët": 48
-          },
-          "Zbatim/menaxhim operativ të projekteve": {
-            "I lartë": 104,
-            Mesatar: 74,
-            "I ulët": 24
-          },
-          "Mobilizim të komunitetit": {
-            "I lartë": 116,
-            Mesatar: 66,
-            "I ulët": 20
-          },
-          "Komunikim me publikun": {
-            "I lartë": 124,
-            Mesatar: 66,
-            "I ulët": 12
-          },
-          "Menaxhim financiar të projekteve": {
-            "I lartë": 108,
-            Mesatar: 70,
-            "I ulët": 24
-          },
-          "Menaxhim të organizatës": {
-            "I lartë": 124,
-            Mesatar: 66,
-            "I ulët": 12
-          }
+          'Shkrim të projekt-propozimeve': { 'I lartë': '43.35', Mesatar: '45.32', 'I ulët': '10.84' },
+          'Gjetje të donatorëve/ngritje të fondeve': { 'I lartë': '29.56', Mesatar: '46.31', 'I ulët': '23.65' },
+          'Zbatim/menaxhim operativ të projekteve': { 'I lartë': '51.23', Mesatar: '36.45', 'I ulët': '11.82' },
+          'Mobilizim të komunitetit': { 'I lartë': '57.14', Mesatar: '32.51', 'I ulët': '9.85' },
+          'Komunikim me publikun': { 'I lartë': '61.08', Mesatar: '32.51', 'I ulët': '5.91' },
+          'Menaxhim financiar të projekteve': { 'I lartë': '53.20', Mesatar: '34.48', 'I ulët': '11.82' },
+          'Menaxhim të organizatës': { 'I lartë': '61.08', Mesatar: '32.51', 'I ulët': '5.91' }
         },
         sr: {
           "Pisanje predloga projekt": {
-            Visok: 88,
-            Prosečan: 92,
-            Nizak: 22
+            Visok: '43.35',
+            Prosečan:'45.32',
+            Nizak: '10.84'
           },
           "Pronalaženje donatora / prikupljanje fondova": {
-            Visok: 60,
-            Prosečan: 94,
-            Nizak: 48
+            Visok: '29.56',
+            Prosečan: '46.31',
+            Nizak: '23.65'
           },
           "Implementacija /upravljanje projektima": {
-            Visok: 104,
-            Prosečan: 74,
-            Nizak: 24
+            Visok: '51.23',
+            Prosečan: '36.45',
+            Nizak: '11.82' 
           },
           "Mobilizacija zajednice": {
-            Visok: 116,
-            Prosečan: 66,
-            Nizak: 20
+            Visok: '57.14',
+            Prosečan: '32.51',
+            Nizak: '9.85'
           },
           "Komunikacija sa javnošću": {
-            Visok: 124,
-            Prosečan: 66,
-            Nizak: 12
+            Visok: '61.08',
+            Prosečan: '32.51',
+            Nizak: '5.91'
           },
           "Finansijsko upravljanje projektima": {
-            Visok: 108,
-            Prosečan: 70,
-            Nizak: 24
+            Visok: '53.20',
+            Prosečan: '34.48',
+            Nizak: '11.82'
           },
           "Rukovodstvo organizacije": {
-            Visok: 124,
-            Prosečan: 66,
-            Nizak: 12
+            Visok: '61.08',
+            Prosečan: '32.51',
+            Nizak: '5.91'
           }
         }
       }
