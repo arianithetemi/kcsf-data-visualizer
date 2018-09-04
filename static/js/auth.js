@@ -22,7 +22,7 @@ function authenticate()
       }
 
       $.ajax({
-         url: APIBaseUrl + 'login',
+         url: APIBaseUrl + '/login',
          type: 'POST',
          dataType: 'json',
          headers: {
