@@ -506,16 +506,10 @@ var drawStaticChart = parameterfy(function(
           });
           if (chart_type == "pie") {
             var percentage = this.point.percentage.toString();
-            formatter =
-              name.length > 30
-                ? name.substring(0, 30) +
-                  "...: " +
-                  Highcharts.numberFormat(percentage) +
-                  "%"
-                : name + ": " + Highcharts.numberFormat(percentage) + "%";
+            formatter = name + ": " + value + "%";
           } else {
-            var pcnt = (value / totalSum) * 100;
-            formatter = Highcharts.numberFormat(pcnt) + "%";
+            var pcnt =value ;
+            formatter = pcnt + "%";
           }
           return formatter;
         }
@@ -535,10 +529,10 @@ var drawStaticChart = parameterfy(function(
     if (chart_type == "pie") {
       var percentage = this.point.percentage.toString();
       formatter =
-        name + ": <b>" + Highcharts.numberFormat(percentage) + "%</b>";
+        name + ": <b>" + value + "%</b>";
     } else {
       var pcnt = (value / totalSum) * 100;
-      formatter = name + ": <b>" + Highcharts.numberFormat(pcnt) + "%</b>";
+      formatter = name + ": <b>" + value + "%</b>";
     }
     return formatter;
   };
