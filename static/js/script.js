@@ -309,12 +309,12 @@ function displayChart(){
                 $("#main-indicator-select").parent().parent().css("margin-top", "30px");
             }, 350);
         }
-           if(main_indicator  != "q69") {
+           if(main_indicator != "q69") {
                 $("#disaggregate-select").parent().parent().hide(350);
+           } else {
+            $("#disaggregate-select").parent().parent().show(350);
            }
-
             displayStaticChart("column-chart-container", static_data[filter.year][main_indicator], "column-chart", main_indicator.replace("q", ""));
-
     } else {
         if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15" || main_indicator == "q69"){
              $("#tab1").prop("disabled", false);
