@@ -3081,103 +3081,73 @@ var static_data = {
       },
       answer: {
         en: {
-          "Grants from central state institutions": "26.0",
-          "Grants from local institutions (municipalities)": "12.8",
-          "Contracts through public procurement": "0.9",
-          "Donations from local private companies": "6.8",
-          "Foreign donors": "31.4",
-          "Individual domestic donations": "1.7",
-          "Revenues from membership fees": "12.0",
-          "Revenues from sale of goods/services": "1.8",
-          "Passive investments (of organization itself)": "0.1",
-          "Investment funds": "0.0",
+          "Grants from central state institutions": "27.7",
+          "Grants from local institutions (municipalities)": "18.8",
+          "Contracts through public procurement": "2.0",
+          "Donations from local private companies": "9.9",
+          "Foreign donors": "28.7",
+          "Individual domestic donations": "4.0",
+          "Revenues from membership fees": "11.9",
+          "Revenues from sale of goods/services": "4.0",
+          "Passive investments (of organization itself)": "7.9",
+          "Investment funds": "6.9",
           Others: "3.0"
         },
         sq: {
-          "Grante nga institucionet qëndrore shtetërore": "26.0",
-          "Grante nga institucionet lokale (komunat)": "12.8",
-          "Kontrata nëpërmjet prokurimit publik": "0.9",
-          "Donacione nga kompanitë private vendore": "6.8",
-          "Donatorët e huaj": "31.4",
-          "Donacionet individuale vendore": "1.7",
-          "Të ardhurat nga tarifat e anëtarësimit": "12.0",
-          "Të ardhurat nga shitja e mallrave/shërbimeve": "1.8",
-          "Investimet pasive (të vetë organizatës)": "0.1",
-          "Fondet investive": "0.0",
+          "Grante nga institucionet qëndrore shtetërore": "27.7",
+          "Grante nga institucionet lokale (komunat)": "18.8",
+          "Kontrata nëpërmjet prokurimit publik": "2.0",
+          "Donacione nga kompanitë private vendore": "9.9",
+          "Donatorët e huaj": "28.7",
+          "Donacionet individuale vendore": "4.0",
+          "Të ardhurat nga tarifat e anëtarësimit": "11.9",
+          "Të ardhurat nga shitja e mallrave/shërbimeve": "4.0",
+          "Investimet pasive (të vetë organizatës)": "7.9",
+          "Fondet investive": "6.9",
           Tjera: "3.0"
         },
         sr: {
-          "Grant od centralnih državnih institucija": "26.0",
-          "Grant od lokalnih institucija (opštine)": "12.8",
-          "Ugovor preko javne nabavke": "0.9",
-          "Donacije od domaćih privatnih preduzeća": "6.8",
-          "Donatacije iz inostranstva": "31.4",
-          "Pojedinačne lokalne donacije": "1.7",
-          "Prihodi od članarina": "12.0",
-          "Prihodi od prodaje roba/usluga": "1.8",
-          "Pasivne investicije (same organizacije)": "0.1",
-          "Investicioni fondovi": "0.0",
+          "Grant od centralnih državnih institucija": "27.7",
+          "Grant od lokalnih institucija (opštine)": "18.8",
+          "Ugovor preko javne nabavke": "2.0",
+          "Donacije od domaćih privatnih preduzeća": "9.9",
+          "Donatacije iz inostranstva": "28.7",
+          "Pojedinačne lokalne donacije": "4.0",
+          "Prihodi od članarina": "11.9",
+          "Prihodi od prodaje roba/usluga": "4.0",
+          "Pasivne investicije (same organizacije)": "7.9",
+          "Investicioni fondovi": "6.9",
           Ostalo: "3.0"
         }
       }
     },
     q69:{
       question: {
-        en: translation_data["2017-2018"]["103"]["en"],
-        sq: translation_data["2017-2018"]["103"]["sq"],
-        sr: translation_data["2017-2018"]["103"]["sr"]
+        en: translation_data["2017-2018"]["69"]["en"],
+        sq: translation_data["2017-2018"]["69"]["sq"],
+        sr: translation_data["2017-2018"]["69"]["sr"]
       },
       answer:{
         en: {
-          "Technical assistance":{
-            Percentage:"5.0",
-          },
-          "Institutional grats":{
-            Percentage:"25.7"
-          },
-          "Grants for projects":{
-            Percentage:"34.7"
-          },
-          "Service contracts":{
-            Percentage:"4.0"
-          },
-          "Other":{
-            Percentage:"3.0"
-          }
+          "Technical assistance":"5.0",
+          "Institutional grats":"25.7",
+          "Grants for projects":"34.7",
+          "Service contracts":"4.0",
+          "Other":"3.0"
         },
         sq: {
-          "Asistencë teknike":{
-            Përqindja:"5.0",
-          },
-          "Grante institucionale":{
-            Përqindja:"25.7"
-          },
-          "Grante për projekte":{
-            Përqindja:"34.7"
-          },
-          "Kontrata për shërbime":{
-            Përqindja:"4.0"
-          },
-          "Tjetër":{
-            Përqindja:"3.0"
-          }
+          "Asistencë teknike":"5.0",
+          "Grante institucionale":"25.7",
+          "Grante për projekte":"34.7",
+          "Kontrata për shërbime":"4.0",
+          "Tjetër":"3.0"
         },
         sr: {
-          "Tehničku pomoć":{
-            Procenat:"5.0",
-          },
-          "Institucionalne grantove":{
-            Procenat:"25.7"
-          },
-          "Grantove za projekte":{
-            Procenat:"34.7"
-          },
-          "Ugovor za pružanje usluga":{
-            Procenat:"4.0"
-          },
-          "Ostalo":{
-            Procenat:"3.0"
-          }
+          "Tehničku pomoć":"5.0",
+          "Institucionalne grantove":"25.7",
+          "Grantove za projekte":"34.7",
+          "Ugovor za pružanje usluga":"4.0",
+          "Ostalo":"3.0"
         }
       }
     },

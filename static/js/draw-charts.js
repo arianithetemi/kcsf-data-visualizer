@@ -717,16 +717,31 @@ var drawChart = parameterfy(function(
           });
           if (chart_type == "pie") {
             var percentage = this.point.percentage.toString();
-            formatter =
+            if(question_id == "q69" || question_id == "q72") {
+              formatter =
+              name.length > 30
+                ? name.substring(0, 30) +
+                  "...: " +
+                  value +
+                  "%"
+                : name + ": " + value+ "%";
+            } else {
+              formatter =
               name.length > 30
                 ? name.substring(0, 30) +
                   "...: " +
                   Highcharts.numberFormat(percentage) +
                   "%"
                 : name + ": " + Highcharts.numberFormat(percentage) + "%";
+            }
           } else {
             var pcnt = (value / totalSum) * 100;
-            formatter = Highcharts.numberFormat(pcnt) + "%";
+            if(question_id == "q69" || question_id == "q72") {
+              formatter = value + "%";
+            } else {
+              formatter = Highcharts.numberFormat(pcnt) + "%";
+            }
+           
           }
           return formatter;
         }
@@ -744,11 +759,21 @@ var drawChart = parameterfy(function(
     });
     if (chart_type == "pie") {
       var percentage = this.point.percentage.toString();
-      formatter =
-        name + ": <b>" + Highcharts.numberFormat(percentage) + "%</b>";
+      if(question_id === "q69" || question_id == "q72") {
+        formatter =
+        name + ": <b>" +value + "%</b>";
+      } else {
+        formatter =
+        name + ": <b>" + value + "%</b>";
+      }
+      
     } else {
       var pcnt = (value / totalSum) * 100;
-      formatter = name + ": <b>" + Highcharts.numberFormat(pcnt) + "%</b>";
+      if(question_id == "q69" || question_id == "q72"){
+        formatter = name + ": <b>" + value + "%</b>";
+      } else {
+        formatter = name + ": <b>" + Highcharts.numberFormat(pcnt) + "%</b>";
+      }
     }
     return formatter;
   };
