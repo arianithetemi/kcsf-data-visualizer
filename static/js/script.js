@@ -37,7 +37,7 @@ var comparison_questions = {
 // questions with static data.
 var static_questions = {
     "2015-2016":["q34", "q35", "q50", "q80", "q117", "q119", "q217", "q222", "q226", "q228", "q407"],
-    "2017-2018": ["q32","q72", "q103", "q203", "q227", "q231", "q407"]
+    "2017-2018": ["q32", "q72","q69", "q103", "q203", "q227", "q231", "q407"]
 };
 
 // structure of topics and the questions within the topics with their dis-aggregate by questions
@@ -309,12 +309,14 @@ function displayChart(){
                 $("#main-indicator-select").parent().parent().css("margin-top", "30px");
             }, 350);
         }
-            $("#disaggregate-select").parent().parent().hide(350);
+           if(main_indicator  != "q69") {
+                $("#disaggregate-select").parent().parent().hide(350);
+           }
 
             displayStaticChart("column-chart-container", static_data[filter.year][main_indicator], "column-chart", main_indicator.replace("q", ""));
 
     } else {
-        if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
+        if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15" || main_indicator == "q69"){
              $("#tab1").prop("disabled", false);
              disaggregate_by=0;
              drawStaticChart(main_indicator,disaggregate_by,chart_type_container,chart_type);
@@ -379,7 +381,7 @@ function initChartRadioButtonsClick(){
         });
         if (static_questions[filter.year].indexOf(main_indicator) != -1) {
             var disaggregate_by_lang = $("#disaggregate-select option:selected" ).text();
-            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
+            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15" || main_indicator == "q69"){
                 $("#tab1").prop("disabled", false);
                     drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb);
             }else{
@@ -389,7 +391,7 @@ function initChartRadioButtonsClick(){
 
         } else {
             if (main_indicator.charAt(0) == "5"){
-            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
+            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15" || main_indicator == "q69"){
                  $("#tab1").prop("disabled", false);
                if (disaggregate_by!="0"){
                     drawStaticChart(main_indicator,disaggregate_by,chart_type_container,checked_rb);
@@ -472,7 +474,7 @@ function disaggregateSelectBoxChange(){
         var main_indicator = $("#main-indicator-select").val();
         if (main_indicator.charAt(0) == "5"){
             var disaggregate_by_lang = $("#disaggregate-select option:selected" ).text();
-            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15"){
+            if (main_indicator=="5N1" || main_indicator=="5N3" || main_indicator=="5A7_5" || main_indicator=="5N4" || main_indicator=="5C15" || main_indicator == "q69"){
                          drawStaticChart(main_indicator,disaggregate_by,chart_type_container,chart_type);
             }else{
                 displayStaticChart(chart_type_container, static_data[filter.year][main_indicator], chart_type, main_indicator.replace("q", ""), disaggregate_by_lang);

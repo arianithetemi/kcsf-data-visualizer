@@ -3130,53 +3130,53 @@ var static_data = {
       answer:{
         en: {
           "Technical assistance":{
-              number:"10",
+            Percentage:"5.0",
           },
-          "Institutional grants":{
-            number:"39"
+          "Institutional grats":{
+            Percentage:"25.7"
           },
           "Grants for projects":{
-            number:"148"
+            Percentage:"34.7"
           },
           "Service contracts":{
-            number:"30"
+            Percentage:"4.0"
           },
           "Other":{
-            number:"14"
+            Percentage:"3.0"
           }
         },
         sq: {
           "Asistencë teknike":{
-              number:"10",
+            Përqindja:"5.0",
           },
           "Grante institucionale":{
-            number:"39"
+            Përqindja:"25.7"
           },
           "Grante për projekte":{
-            number:"148"
+            Përqindja:"34.7"
           },
           "Kontrata për shërbime":{
-            number:"30"
+            Përqindja:"4.0"
           },
           "Tjetër":{
-            number:"14"
+            Përqindja:"3.0"
           }
         },
         sr: {
           "Tehničku pomoć":{
-              number:"10",
+            Procenat:"5.0",
           },
           "Institucionalne grantove":{
-            number:"39"
+            Procenat:"25.7"
           },
           "Grantove za projekte":{
-            number:"148"
+            Procenat:"34.7"
           },
           "Ugovor za pružanje usluga":{
-            number:"30"
+            Procenat:"4.0"
           },
           "Ostalo":{
-            number:"14"
+            Procenat:"3.0"
           }
         }
       }
