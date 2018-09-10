@@ -1,4 +1,4 @@
 name: KCSF Visualizer
-requesturl: "'https://63626855.ngrok.io'"
+requesturl: "'https://kcsf-api-test.opendatakosovo.org'"
 baseurl: /kcsf-data-visualizer
 basepath: "/kcsf-data-visualizer"
