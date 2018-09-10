@@ -12,6 +12,10 @@ body {
     src: url("../font/Exo-Regular.otf");
 }
 
+.kcsf-logo {
+    margin-top: 25px;
+}
+
 .navbar-inverse {
     background-image: linear-gradient(to bottom, #157BB6 0, #269de5 100%) !important;
     border-color: #157BB6 !important;
