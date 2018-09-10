@@ -5,8 +5,16 @@
             <div class="footer-container">
                 <div class="col-md-4" style="text-align: center;">
                     <a href="#" target="_blank" style="color: white;">
-                        <img src="../static/images/swedish-logo.png" alt="" style="margin: 0 auto; width: 150px;"
-                             class="img-responsive">
+                        {% if page.language == "english" %}
+                            <img src="../static/images/sweden-en.png" alt="" style="margin: 40px auto; width: 250px;"
+                            class="img-responsive">
+                        {% elsif page.language == "serbian" %}
+                            <img src="../static/images/sweden-sr.png" alt="" style="margin: 40px auto; width: 250px;"
+                            class="img-responsive">
+                        {% else %}
+                            <img src="../static/images/sweden-sq.png" alt="" style="margin: 40px auto; width: 250px;"
+                            class="img-responsive">
+                        {% endif %}
                     </a>
                     <br/>
                 </div>
