@@ -3,274 +3,311 @@
 {% include admin/head.html %}
 <script>
 
-   var APIBaseUrl = {{ site.requesturl }}
+    var APIBaseUrl = {{ site.requesturl }}
 
-   // Checking if user is not logged in
-   if (localStorage.getItem('token') == null) {
-      window.location.href = "{{ site.basepath }}/login";
-   }
+    // Checking if user is not logged in
+    if (localStorage.getItem('token') == null) {
+        window.location.href = "{{ site.basepath }}/login";
+    }
 
-   // If message from response says token invalid force logout the user
-   const tokenValidation = msg => {
-      if (msg == 'Token is invalid!') {
-         localStorage.removeItem('token');
-         window.location.href = "{{ site.basepath }}/login";
-      }
-   }
+    // If message from response says token invalid force logout the user
+    const tokenValidation = msg => {
+        if (msg == 'Token is invalid!') {
+            localStorage.removeItem('token');
+            window.location.href = "{{ site.basepath }}/login";
+        }
+    }
 
-   var hashValue = window.location.hash.substr(1);
+    var hashValue = window.location.hash.substr(1);
 
-   $(document).ready(() => {
-      // Get logged in admin information
-      const getProfile = () => {
-         $.ajax({
-            url: APIBaseUrl + '/profile',
-            type: 'GET',
-            dataType: 'json',
-            headers: {
-               'Content-Type': 'application/json',
-               'x-access-token': localStorage.getItem('token')
-            },
-            // crossDomain: true,
-            success: data => {
-               tokenValidation(data.msg);
-               $('#fullName').html(`${data.firstName} ${data.lastName}`);
-               $('#email').html(`${data.email}`);
-            },
-            error: err => {
-               console.log(err);
-            }
-         });
-      }
+    $(document).ready(() => {
+        // Get logged in admin information
+        const getProfile = () => {
+            $.ajax({
+                url: APIBaseUrl + '/profile',
+                type: 'GET',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': localStorage.getItem('token')
+                },
+                // crossDomain: true,
+                success: data => {
+                    tokenValidation(data.msg);
+                    $('#fullName').html(`${data.firstName} ${data.lastName}`);
+                    $('#email').html(`${data.email}`);
+                },
+                error: err => {
+                    console.log(err);
+                }
+            });
+        }
 
-      // Check the value of hash and show the proper page
-      if(hashValue == '' || hashValue == 'profile') {
-         $('#data-cont').hide();
-         getProfile();
-      } else if (hashValue == 'data') {
-         $('.nav-item').removeClass('active');
-         $('#dataLink').addClass('active');
-         $('#profile-cont').hide();
-         $('#data-cont').show();
-      }
+        // Check the value of hash and show the proper page
+        if (hashValue == '' || hashValue == 'profile') {
+            $('#data-cont').hide();
+            getProfile();
+        } else if (hashValue == 'data') {
+            $('.nav-item').removeClass('active');
+            $('#dataLink').addClass('active');
+            $('#profile-cont').hide();
+            $('#data-cont').show();
+        }
 
-      // Clicking on profile link
-      $('#profileLink').click(() => {
-         $('.nav-item').removeClass('active');
-         $('#profileLink').addClass('active');
-         $('#data-cont').hide();
-         $('#profile-cont').show();
-         getProfile();
-      });
+        // Clicking on profile link
+        $('#profileLink').click(() => {
+            $('.nav-item').removeClass('active');
+            $('#profileLink').addClass('active');
+            $('#data-cont').hide();
+            $('#profile-cont').show();
+            getProfile();
+        });
 
-      // Clicking on data link
-      $('#dataLink').click(() => {
-         $('.nav-item').removeClass('active');
-         $('#dataLink').addClass('active');
-         $('#profile-cont').hide();
-         $('#data-cont').show();
-      })
+        // Clicking on data link
+        $('#dataLink').click(() => {
+            $('.nav-item').removeClass('active');
+            $('#dataLink').addClass('active');
+            $('#profile-cont').hide();
+            $('#data-cont').show();
+        })
 
-      // Submitting the form
-      $('#import-data-form').on('submit', e => {
-         e.preventDefault();
+        // Submitting the form
+        $('#import-data-form').on('submit', e => {
+            e.preventDefault();
 
-         var formData = new FormData($('#import-data-form')[0]);
-        
-         swal({
+            var formData = new FormData($('#import-data-form')[0]);
+
+            swal({
                 title: 'Info!',
                 text: 'Duke kontrullar dhe importuar setin e të dhënave.',
                 onOpen: () => {
                     swal.showLoading()
                 }
             });
-            
-         $.ajax({
-            type: 'POST',
-            url: APIBaseUrl + '/import-data',
-            data: formData,
-            contentType: false,
-            processData: false,
-            headers: {
-               'x-access-token': localStorage.getItem('token')
-            },
-            success: function(data) {
-               swal({
-                 type: data.success ? 'success' : 'error',
-                 title: data.success ? 'Sukses' : 'Gabim',
-                 text: data.msg,
-              }).then((result) => {
-                 if (result.value && data.success) {
-                    $('#import-data-form').trigger("reset");
-                 }
-              });
-            },
-            error: function(err) {
-               swal({
-                 type: 'error',
-                 title: 'Gabim',
-                 text: err,
-              }).then((result) => {
-                 if (result.value && data.success) {
-                    $('#import-data-form').trigger("reset");
-                 }
-              });
-            }
+
+            $.ajax({
+                type: 'POST',
+                url: APIBaseUrl + '/import-data',
+                data: formData,
+                contentType: false,
+                processData: false,
+                headers: {
+                    'x-access-token': localStorage.getItem('token')
+                },
+                success: function (data) {
+                    if (data.success) {
+                        swal({
+                            type: data.success ? 'success' : 'error',
+                            title: data.success ? 'Sukses' : 'Gabim',
+                            text: data.msg,
+                        }).then((result) => {
+                            if (result.value && data.success) {
+                                $('#import-data-form').trigger("reset");
+                            }
+                        });
+                    } else {
+                        swal({
+                            type: 'error',
+                            title: 'Gabim',
+                            text: data.msg,
+                        }).then((result) => {
+                            if (result.value && data.success) {
+                                $('#import-data-form').trigger("reset");
+                            }
+                        });
+                    }
+                },
+
+            });
+
         });
 
-      });
+        // Change Password event
+        $('#changePasswordForm').on('submit', e => {
+            e.preventDefault();
 
-      // Change Password event
-      $('#changePasswordForm').on('submit', e => {
-         e.preventDefault();
-
-         data = {
-            currentPassword: $('#currentPassword').val(),
-            newPassword: $('#newPassword').val(),
-            newPasswordConfirm: $('#newPasswordConfirm').val()
-         }
-
-         $.ajax({
-            url: APIBaseUrl + '/change-password',
-            type: 'POST',
-            dataType: 'json',
-            headers: {
-                'Content-Type': 'application/json',
-                'x-access-token': localStorage.getItem('token')
-            },
-            crossDomain: true,
-            data: JSON.stringify(data),
-            success: data => {
-               swal({
-                 type: data.success ? 'success' : 'error',
-                 title: data.success ? 'Sukses' : 'Gabim',
-                 text: data.msg,
-              }).then((result) => {
-                 if (result.value && data.success) {
-                    $('#change-password-modal').modal('hide');
-                    $('#changePasswordForm').trigger("reset");
-                 }
-              });
+            data = {
+                currentPassword: $('#currentPassword').val(),
+                newPassword: $('#newPassword').val(),
+                newPasswordConfirm: $('#newPasswordConfirm').val()
             }
-         });
-      });
-   });
 
-   // Logging out the user
-   $(document).on('click', '#logout', e => {
-      e.preventDefault();
-      localStorage.removeItem('token');
-      window.location.href = "{{ site.basepath }}/login";
-   });
+            $.ajax({
+                url: APIBaseUrl + '/change-password',
+                type: 'POST',
+                dataType: 'json',
+                headers: {
+                    'Content-Type': 'application/json',
+                    'x-access-token': localStorage.getItem('token')
+                },
+                crossDomain: true,
+                data: JSON.stringify(data),
+                success: data => {
+                    swal({
+                        type: data.success ? 'success' : 'error',
+                        title: data.success ? 'Sukses' : 'Gabim',
+                        text: data.msg,
+                    }).then((result) => {
+                        if (result.value && data.success) {
+                            $('#change-password-modal').modal('hide');
+                            $('#changePasswordForm').trigger("reset");
+                        }
+                    });
+                }
+            });
+        });
+    });
+
+    // Logging out the user
+    $(document).on('click', '#logout', e => {
+        e.preventDefault();
+        localStorage.removeItem('token');
+        window.location.href = "{{ site.basepath }}/login";
+    });
 </script>
 
 </head>
 
 <body class="fixed-nav sticky-footer bg-dark" id="page-top">
-  {% include admin/navbar.html %}
+    {% include admin/navbar.html %}
 
-<div class="content-wrapper">
-   <div class="container-fluid">
-   <div id="profile-cont" class="col-md-12 mt-3">
-      <div class="row mb-4 mt-2">
-          <div class="col-md-12">
-              <h3 class="text-center">Profili</h3>
-          </div>
-      </div>
-      <div class="row">
-         <div class="col-md-1"></div>
-         <div class="col-md-10">
-              <table class="table profile table-hover">
-                  <thead>
-                      <th id="profile-header" colspan="2">Të dhënat e profilit</th>
-                  </thead>
-                  <tbody>
-                      <tr>
-                          <th>Administratori:</th>
-                          <td id="fullName"></td>
-                      </tr>
-                      <tr>
-                          <th>Email:</th>
-                          <td id="email"></td>
-                      </tr>
-                  </tbody>
-              </table>
-              <div class="col-md-12 change-btns">
-                  <button class='btn btn-primary' id="change-password-btn" data-toggle="modal" style='margin-top: 10px;' data-target="#change-password-modal">
-                     Ndrysho fjalëkalimin
-                  </button>
-                  <!-- Change password modal -->
-                  <div class="modal fade" tabindex="-1" role="dialog" id="change-password-modal">
-                      <div class="modal-dialog" role="document">
-                          <div class="modal-content">
-                              <div class="modal-header">
-                                  <h5 class="modal-title">Ndrysho fjalëkalimin</h5>
-                                  <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                                      <span aria-hidden="true">&times;</span>
-                                  </button>
-                              </div>
-                              <div class="modal-body">
-                                  <form id="changePasswordForm">
-                                      <div class="form-group">
-                                          <label for="currentpassword">Fjalëkalimi aktual:</label>
-                                          <input type="password" class="form-control" id="currentPassword" name="currentPassword">
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="newPassword">Fjalëkalimi i ri:</label>
-                                          <input type="password" class="form-control" id="newPassword" name="newPassword">
-                                      </div>
-                                      <div class="form-group">
-                                          <label for="newPassword">Konfirmo fjalëkalimin e ri:</label>
-                                          <input type="password" class="form-control" id="newPasswordConfirm" name="newPasswordConfirm">
-                                      </div>
-                                 </div>
-                                 <div class="modal-footer">
-                                     <button type="button" class="btn btn-secondary cncl-button" data-dismiss="modal">Anulo</button>
-                                     <input type='submit' value="Ruaj" class="btn btn-primary cnfrm-button">
-                                 </div>
-                              </form>
-                          </div>
-                      </div>
-                  </div>
-              </div>
-         </div>
-      </div>
-   </div>
-
-   <div style="display: none" id="data-cont" class="col-md-12 mt-3">
-      <div class="row mb-4 mt-2">
-          <div class="col-md-12">
-              <h3 class="text-center mb-5">Të dhënat</h3>
-              <div class="row">
-                 <div class="col-md-4"></div>
-                 <div class="col-md-4">
-                     <form id="import-data-form" method="POST" enctype="multipart/form-data">
-                        <div class="form-group">
-                           <label for="school_image">Fajlli i të dhënave:</label>
-                           <input type="file" id="data-file" name="data-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+    <div class="content-wrapper">
+        <div class="container-fluid">
+            <div id="profile-cont" class="col-md-12 mt-3">
+                <div class="row mb-4 mt-2">
+                    <div class="col-md-12">
+                        <h3 class="text-center">Profili</h3>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col-md-1"></div>
+                    <div class="col-md-10">
+                        <table class="table profile table-hover">
+                            <thead>
+                                <th id="profile-header" colspan="2">Të dhënat e profilit</th>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <th>Administratori:</th>
+                                    <td id="fullName"></td>
+                                </tr>
+                                <tr>
+                                    <th>Email:</th>
+                                    <td id="email"></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                        <div class="col-md-12 change-btns">
+                            <button class='btn btn-primary' id="change-password-btn" data-toggle="modal" style='margin-top: 10px;'
+                                data-target="#change-password-modal">
+                                Ndrysho fjalëkalimin
+                            </button>
+                            <!-- Change password modal -->
+                            <div class="modal fade" tabindex="-1" role="dialog" id="change-password-modal">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title">Ndrysho fjalëkalimin</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form id="changePasswordForm">
+                                                <div class="form-group">
+                                                    <label for="currentpassword">Fjalëkalimi aktual:</label>
+                                                    <input type="password" class="form-control" id="currentPassword"
+                                                        name="currentPassword">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="newPassword">Fjalëkalimi i ri:</label>
+                                                    <input type="password" class="form-control" id="newPassword" name="newPassword">
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="newPassword">Konfirmo fjalëkalimin e ri:</label>
+                                                    <input type="password" class="form-control" id="newPasswordConfirm"
+                                                        name="newPasswordConfirm">
+                                                </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary cncl-button" data-dismiss="modal">Anulo</button>
+                                            <input type='submit' value="Ruaj" class="btn btn-ßprimary cnfrm-button">
+                                        </div>
+                                        </form>
+                                    </div>
+                                </div>
+                            </div>
                         </div>
-                        <div class="form-group">
-                           <label for="school_image">Fajlli i të dhënave per pyetjet:</label>
-                           <input type="file" id="questions-file" name="questions-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
-                        </div>
-                        <div class="form-group">
-                           <label for="school_image">Fajlli i të dhënave per pergjigjjet:</label>
-                           <input type="file" id="answers-file" name="answers-file" class="filestyle my-style" data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
-                        </div>
-                         <div class="form-group">
-                            <label for='year'>
-                                Rangu i  Viteve
-                            </label>
-                           <input class="form-control" type="text" name="year" id="year">
-                        </div>
+                    </div>
+                </div>
+            </div>
 
-                        <button type="submit" class="btn btn-block btn-primary">Importo</button>
-                     </form>
-                 </div>
-          </div>
-      </div>
+            <div style="display: none" id="data-cont" class="col-md-12 mt-3">
+                <div class="row mb-4 mt-2">
+                    <div class="col-md-12">
+                        <h3 class="text-center mb-5">Të dhënat</h3>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <div class="alert alert-danger" role="alert">
+                                    Njoftim!: Përdorni si shabllon dokumentet në linqet e mëposhtëm për të importuar me
+                                    sukses.:<br>
+                                    <ul>
+                                        <li>
+                                                <a href="{{ site.basepath }}/static/download/csv-datasets/2017-2018/cso-data.csv"
+                                                download class="download-nav">
+                                                  Fajlli i të dhënave (cso-data.csv)
+                                               </a>
+                                        </li>
+                                        <li>
+                                                <a href="{{ site.basepath }}/static/download/csv-datasets/2017-2018/cso-questions.csv"
+                                                download class="download-nav">
+                                                  Fajlli i pyetjeve (cso-questions.csv)
+                                               </a>
+                                        </li>
+                                        <li>
+                                                <a href="{{ site.basepath }}/static/download/csv-datasets/2017-2018/cso-answers.csv"
+                                                download class="download-nav">
+                                                  Fajlli i të përgjigjeve (cso-answers.csv)
+                                               </a>
+                                        </li>
+                                    </ul>
+                                </div>
+                                <div class="alert alert-danger" role="alert">
+                                    Njoftim!: Ju lutem shënoni nē fushën "rangu i viteve", specifikisht rangun e viteve
+                                    të të dhënave të reja p.sh 2019-2020.
+                                </div>
+                            </div>
+                            <div class="col-md-6">
+                                <form id="import-data-form" method="POST" enctype="multipart/form-data">
+                                    <div class="form-group">
+                                        <label for="school_image">Fajlli i të dhënave:</label>
+                                        <input type="file" id="data-file" name="data-file" class="filestyle my-style"
+                                            data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="school_image">Fajlli i të dhënave per pyetjet:</label>
+                                        <input type="file" id="questions-file" name="questions-file" class="filestyle my-style"
+                                            data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="school_image">Fajlli i të dhënave per pergjigjjet:</label>
+                                        <input type="file" id="answers-file" name="answers-file" class="filestyle my-style"
+                                            data-buttonbefore="false" data-text="Ngarko" data-btnclass="btn-primary">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for='year'>
+                                            Rangu i Viteve
+                                        </label>
+                                        <input class="form-control" type="text" name="year" id="year">
+                                    </div>
 
-   </div>
-</div>
+                                    <button type="submit" class="btn btn-block btn-primary">Importo</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
 
-{% include admin/footer.html %}
+                </div>
+            </div>
+
+            {% include admin/footer.html %}

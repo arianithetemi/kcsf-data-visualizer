@@ -81,9 +81,14 @@ function resetPasswordAction()
       let data = {
          email: $('#emailForgotPassword').val()
       }
-
+      swal({
+        title: 'Duke kontrullar!',
+        onOpen: () => {
+            swal.showLoading()
+        }
+    });
       $.ajax({
-         url: APIBaseUrl + 'forgot_password',
+         url: APIBaseUrl + '/forgot_password',
          type: 'POST',
          dataType: 'json',
          headers: {
@@ -92,14 +97,10 @@ function resetPasswordAction()
          crossDomain: true,
          data: JSON.stringify(data),
          success: data => {
-            console.log(data);
             if (data.success == true) {
-               $('.responseMessage').html(data.msg);
-               $('.responseMessage').removeClass('hideItem');
-               $('.responseMessage').fadeOut(3000);
-               // window.location.href = "{{ site.basepath }}/dashboard";
+               swal("Sukses!",data.msg,"success");
             } else {
-               alert("Email ose fjalëkalimi është gabim!");
+                swal("Gabim!","Email është gabim!","error");
             }
          }
       })
@@ -119,28 +120,59 @@ function changePasswordAction()
          repeatNewPassword: $('#retypePassword').val(),
          code: code
       }
-
-      $.ajax({
-         url: APIBaseUrl + 'reset_password/' + code ,
-         type: 'POST',
-         dataType: 'json',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         crossDomain: true,
-         data: JSON.stringify(data),
-         success: data => {
-            if (data.success == true) {
-               $('.responseMessage').html(data.msg)
-               $('.responseMessage').removeClass('hideItem')
-               window.location = "{{ site.basepath }}/login"
-            } else {
-               alert("Email ose fjalëkalimi është gabim!");
+      if(data.newPassword == data.repeatNewPassword) {
+        swal({
+            title: 'Duke ndryshuar fjalëkalimin!',
+            onOpen: () => {
+                swal.showLoading()
             }
-         }
-      })
+          });
+        $.ajax({
+            url: APIBaseUrl + '/reset_password/' + code ,
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            crossDomain: true,
+            data: JSON.stringify(data),
+            success: data => {
+               if (data.success == true) {
+                   swal("Sukses!",data.msg,"success").then(result => {
+                       if(result.value) {
+                           window.location = "{{ site.basepath }}/login"
+                       }
+                   });
+               } else {
+                   swal("Gabim!",`Ka dështuar kërkesa, shkaku ështē ky: ${data.msg}`,"error");
+               }
+            }
+         })
+      } else {
+        swal("Gabim!","Fjalëkalimet nuk përputhen!","error");
+      }
    })
 
+}
+
+
+function checkIfDateExpired() {
+    let code = findGetParameter('code');
+    console.log(code)
+    $.ajax({
+        url: APIBaseUrl + '/reset_password/' + code ,
+        type: 'GET',
+        dataType: 'json',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        crossDomain: true,
+        success: data => {
+           if (data.success ==  false) {
+            window.location = "{{ site.basepath }}/login"
+           } 
+        }
+     })
 }
 
 

@@ -20,6 +20,8 @@ body {
     width: 190px;
 }
 
+
+
 .navbar-inverse {
     background-image: linear-gradient(to bottom, #157BB6 0, #269de5 100%) !important;
     border-color: #157BB6 !important;
@@ -312,4 +314,55 @@ body {
 }
 .navbar{
     border-radius: 0px;
+}
+.questionnaire-dropdown-menu {
+    width: 173px;
+    left: 0px;
+}
+
+.raports-dropdown-menu {
+    width: 158px!important;
+    min-width: 156px;
+}
+.raports-dropdown-menu-en {
+    width: 154px!important;
+    min-width: 134px;
+}
+.raports-dropdown-menu-sr {
+    width: 161px!important;
+    min-width: 134px;
+}
+
+.datasets-dropdown-menu {
+    width: 163px!important;
+    min-width: 134px; 
+}
+.datasets-dropdown-menu-en {
+    width: 153px!important;
+    min-width: 134px; 
+}
+
+.datasets-dropdown-menu-sr {
+    width: 156px!important;
+    min-width: 134px; 
+}
+.questionnaire-dropdown-menu li .download-nav , .raports-dropdown-menu li .download-nav, .datasets-dropdown-menu li .download-nav{
+    color: #157BB6 !important;
+}
+
+.questionnaire-dropdown-menu-en {
+    width: 196px;
+    left: 0px;
+}
+
+.questionnaire-dropdown-menu-sr {
+    width: 166px;
+    left: 0px;
+}
+.dropdown.open > .dropdown-toggle{
+    background-color: #0f608c !important;
+}
+
+.right-comparision-buttons {
+    margin-top: -42px !important;
 }
