@@ -53,9 +53,9 @@
 
 .tabs label:hover {
     cursor: pointer;
-    color: #3498db;
-    box-shadow: inset 0 4px #3498db;
-    border-bottom: 4px solid #3498db;
+    color: #233f8c;
+    box-shadow: inset 0 4px #233f8c;
+    border-bottom: 4px solid #233f8c;
 }
 
 .tab-content {
@@ -95,9 +95,9 @@
 
 .tabs [id^="tab"]:checked + label {
     background: #FFF;
-    box-shadow: inset 0 4px #3498db;
-    border-bottom: 4px solid #3498db;
-    color: #3498db;
+    box-shadow: inset 0 4px #233f8c;
+    border-bottom: 4px solid #233f8c;
+    color: #233f8c;
 }
 
 #tab1:checked ~ #tab-content1,
