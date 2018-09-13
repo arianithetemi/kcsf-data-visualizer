@@ -62,3 +62,10 @@ body.my-login-page {
 	color: #888;
 	text-align: center;
 }
+#email-error.error, #password-error.error, #emailForgotPassword-error.error, #retypePassword-error.error {
+	color: red;
+}
+
+#email.error , #password.error, #emailForgotPassword.error, #retypePassword.error {
+	border-color: red !important;
+}
