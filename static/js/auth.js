@@ -103,7 +103,7 @@ function resetPasswordAction()
       let data = {
          email: $('#emailForgotPassword').val()
       }
-      if ($('#email').val() === "" ) {
+      if ($('#emailForgotPassword').val() === "" ) {
         swal({
             type: 'warning',
             title: 'Kujdes!',
