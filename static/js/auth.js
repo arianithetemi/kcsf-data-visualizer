@@ -21,32 +21,54 @@ function authenticate()
          password: $('#password').val()
       }
 
-      $.ajax({
-         url: APIBaseUrl + '/login',
-         type: 'POST',
-         dataType: 'json',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         crossDomain: true,
-         data: JSON.stringify(data),
-         success: data => {
-            if (data.success == true) {
-               window.location.href = "{{ site.basepath }}/dashboard";
-               localStorage.setItem('token', data.token);
-            } else {
-               swal({
-                 type: 'error',
-                 title: 'Gabim',
-                 text: data.msg,
-              }).then((result) => {
-                 if (result.value && data.success) {
-                    $('#import-data-form').trigger("reset");
-                 }
-              });
+      if(data.email == "" && data.password == "") {
+        swal({
+            type: 'warning',
+            title: 'Kujdes!',
+            text: 'Ju lutem shënoni email dhe fjalëkalimin',
+         })
+      } else if ($('#email').val() === "" ) {
+        swal({
+            type: 'warning',
+            title: 'Kujdes!',
+            text: 'Ju lutem shënoni email',
+         })
+      } else if (data.password == "") {
+        swal({
+            type: 'warning',
+            title: 'Kujdes!',
+            text: 'Ju lutem shënoni fjalëkalimin',
+         })
+      } else {
+        $.ajax({
+            url: APIBaseUrl + '/login',
+            type: 'POST',
+            dataType: 'json',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            crossDomain: true,
+            data: JSON.stringify(data),
+            success: data => {
+               if (data.success == true) {
+                  window.location.href = "{{ site.basepath }}/dashboard";
+                  localStorage.setItem('token', data.token);
+               } else {
+                  swal({
+                    type: 'error',
+                    title: 'Gabim',
+                    text: data.msg,
+                 }).then((result) => {
+                    if (result.value && data.success) {
+                       $('#import-data-form').trigger("reset");
+                    }
+                 });
+               }
             }
-         }
-      })
+         })
+      }
+
+      
    });
 
 }
@@ -81,29 +103,38 @@ function resetPasswordAction()
       let data = {
          email: $('#emailForgotPassword').val()
       }
-      swal({
-        title: 'Duke kontrullar!',
-        onOpen: () => {
-            swal.showLoading()
-        }
-    });
-      $.ajax({
-         url: APIBaseUrl + '/forgot_password',
-         type: 'POST',
-         dataType: 'json',
-         headers: {
-             'Content-Type': 'application/json'
-         },
-         crossDomain: true,
-         data: JSON.stringify(data),
-         success: data => {
-            if (data.success == true) {
-               swal("Sukses!",data.msg,"success");
-            } else {
-                swal("Gabim!","Email është gabim!","error");
+      if ($('#email').val() === "" ) {
+        swal({
+            type: 'warning',
+            title: 'Kujdes!',
+            text: 'Ju lutem shënoni email',
+         })
+      } else {
+        swal({
+            title: 'Duke kontrullar!',
+            onOpen: () => {
+                swal.showLoading()
             }
-         }
-      })
+        });
+          $.ajax({
+             url: APIBaseUrl + '/forgot_password',
+             type: 'POST',
+             dataType: 'json',
+             headers: {
+                 'Content-Type': 'application/json'
+             },
+             crossDomain: true,
+             data: JSON.stringify(data),
+             success: data => {
+                if (data.success == true) {
+                   swal("Sukses!",data.msg,"success");
+                } else {
+                    swal("Gabim!","Email është gabim!","error");
+                }
+             }
+          })
+      }
+      
    })
 }
 

@@ -570,6 +570,7 @@ var drawStaticChart = parameterfy(function(
         fontFamily: "Exo"
       }
     },
+    colors:["#071933","#0a2149","#122a5b","#193575","#666fd6","#233fc8","#233fe0"],
     title: {
       text: title
     },
@@ -594,7 +595,6 @@ var drawStaticChart = parameterfy(function(
     series: [
       {
         showInLegend: false,
-        colorByPoint: true,
         data: series_data
       }
     ],
@@ -833,6 +833,7 @@ var drawChart = parameterfy(function(
       },
       formatter: tooltip_formatter
     },
+    colors:["#071933","#0a2149","#122a5b","#193575","#666fd6","#233fc8","#233fe0"],
     series: [
       {
         showInLegend: false,
@@ -957,6 +958,7 @@ function drawMultipleSeriesChart(
       min: 0,
       minRange: 0.1
     },
+    colors:["#071933","#0a2149","#122a5b","#193575","#666fd6","#233fc8","#233fe0"],
     tooltip: {
       backgroundColor: "rgba(255,255,255,1)",
       headerFormat:
