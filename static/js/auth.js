@@ -101,7 +101,7 @@ $('#resetPassword').validate({
                    if (data.success == true) {
                       swal("Sukses!",data.msg,"success");
                    } else {
-                       swal("Gabim!",data.msg,"error");
+                       swal("Gabim!","Email që keni shtypur nuk ekziston në bazën e të dhënave!","error");
                    }
                 }
              })
