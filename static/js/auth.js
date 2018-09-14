@@ -101,7 +101,7 @@ $('#resetPassword').validate({
                    if (data.success == true) {
                       swal("Sukses!",data.msg,"success");
                    } else {
-                       swal("Gabim!","Email është gabim!","error");
+                       swal("Gabim!",data.msg,"error");
                    }
                 }
              })
